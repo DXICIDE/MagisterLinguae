@@ -1,28 +1,42 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
+	"os"
 
+	"github.com/DXICIDE/MagisterLinguae/internal/database"
 	"github.com/DXICIDE/MagisterLinguae/internal/repl"
 )
 
+type apiConfig struct {
+	db *database.Queries
+}
+
 func main() {
-	for true {
-		words := repl.Scan()
-		if len(words) == 0 {
-			continue
-		}
+	dbURL := os.Getenv("DB_URL")
+	db, err := sql.Open("postgres", dbURL)
+	if err != nil {
+		fmt.Printf("Couldn't connect to the DB: %s", err)
+	}
+	dbQueries := database.New(db)
+	apiCfg := &apiConfig{}
+	apiCfg.db = dbQueries
 
-		switch words[0] {
-		case "known":
+	words := repl.Scan()
+	if len(words) == 0 {
+		fmt.Println("Nothing was inputed")
+	}
 
-		case "scan":
+	switch words[0] {
+	case "learn":
 
-		case "q":
-			fmt.Println("exiting")
-			return
-		default:
-			fmt.Println("I dont understand the command")
-		}
+	case "mark":
+
+	case "lookup":
+
+	default:
+		fmt.Println("I dont understand the command")
+
 	}
 }
