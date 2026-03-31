@@ -7,6 +7,7 @@ import (
 
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
 	"github.com/DXICIDE/MagisterLinguae/internal/repl"
+	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
 type apiConfig struct {
@@ -30,7 +31,7 @@ func main() {
 
 	switch words[0] {
 	case "learn":
-
+		_, err = repl.Learn(apiCfg.db, words[1:])
 	case "mark":
 
 	case "lookup":
