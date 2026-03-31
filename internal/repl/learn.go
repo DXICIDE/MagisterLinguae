@@ -15,18 +15,22 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 
 	var proccesedWords []string
 
-	for _, n := range words {
-		word, err := db.GetWord(ctx, n)
-		if err == sql.ErrNoRows {
-			fmt.Println("Word not found")
-			createWord := database.CreateWordParams{TokenName: n, Known: false}
-			db.CreateWord(ctx, createWord)
-			proccesedWords = append(proccesedWords, n)
-		} else if err != nil {
-			return nil, err
-		}
-		proccesedWords = append(proccesedWords, word.TokenName)
+	//for loop for checking each word individually
+	for _, wordName := range words {
+		fmt.Print(wordName)
+		word, err := db.GetWord(ctx, wordName)
 
+		if err == sql.ErrNoRows { //if the word is not in db
+			fmt.Println("Word not found")
+			createWord := database.CreateWordParams{TokenName: wordName, Known: false}
+			db.CreateWord(ctx, createWord)
+			proccesedWords = append(proccesedWords, wordName)
+		} else if err != nil { //other errors
+			return nil, fmt.Errorf("database error getting word '%s': %w", wordName, err)
+		} else { //if the word is in db
+			fmt.Printf("Word '%s' already exists\n", wordName)
+			proccesedWords = append(proccesedWords, word.TokenName)
+		}
 	}
 	return proccesedWords, nil
 }
