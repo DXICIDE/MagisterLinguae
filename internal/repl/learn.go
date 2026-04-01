@@ -20,7 +20,7 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 	for _, wordName := range words {
 		word := wordName
 		word = strings.ToLower(word)
-		if word == "," || word == "." {
+		if word == "," || word == "." || word == "?" || word == "!" {
 			proccesedWords = append(proccesedWords, wordName)
 			continue
 		}

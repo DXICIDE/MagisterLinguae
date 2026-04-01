@@ -1,8 +1,39 @@
-# MagisterLinguae
+# MagisterLinguae 0.1
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
 The project is my attempt at creating language learning engine fitting for my needs. Any features added will fit my use case.
-It is intented to be my solely my project, partly for my CV and partly for my use. But feel free to fork it or use it as u wish. 
+It is intented to be my solely my project, partly for my CV and partly for my use. But feel free to fork it or use it as u wish.
+No AI was used for generating this code, it might be slop, but it's my slop. AI was used only for help with direction and what to focus on. And occasionly
+the sneaky bugs:) 
 
-The project is written in Go, as it's my most used language, the first iteration will be a CLI, UI will be coming later. 
+The project is written in Go, as it's my most used language, the first iteration will be a CLI, REPL and UI will be coming later.
+
+This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
+not stay the same in the release of 1.0
+
+## Current features: 
+- The program can recognise words (case insensitive) which are then stored in db
+- Words are stored stored with boolean known and unknown, user marks words that he knows, any other are unknown*
+- Words are arranged back into previous sentences, unknown words are distinguishable by these brackets "[]" in the stdout
+- Currently supports only Italian, other languages haven't been tested
+
+*known words should be marked when user completely understands them 
+
+These all will be updated depending on what is completed and what new comes up
+### Future features:
+(based on priority and its complexity, most important and least complex are on top)
+- refactorization of the code, make it simpler, cleaner and more readable
+- probably REPL, makes the use of program very easier, at least for marking
+- prompting the user to mark words as known after reaching certain frequency of the word
+- supporting other languages
+- dictionary api
+- quiz based on words u know and have not seen for a long time, kinda like anki or something like that
+
+(The holy grail)
+- web UI
+
+#### Optional:
+- AI support
+- account support
+- subscription or paygate system (just for learning, I intend for this project to stay open source)
