@@ -6,21 +6,29 @@ import (
 	"os"
 	"strings"
 	"text/scanner"
+	"unicode"
 )
 
-// scans the input for multiple lines
 func Scan() []string {
 	fmt.Print("> ")
-	in := bufio.NewScanner(os.Stdin)
-	scanned := in.Scan()
-	if !scanned {
+	scan := bufio.NewScanner(os.Stdin)
+	if !scan.Scan() {
 		return nil
 	}
-	line := in.Text()
+	line := scan.Text()
 	line = strings.TrimSpace(line)
+	if line == "" {
+		return nil
+	}
+
 	var s scanner.Scanner
 	s.Init(strings.NewReader(line))
-	s.Mode = scanner.ScanIdents | scanner.ScanStrings
+	s.Mode = scanner.ScanIdents | scanner.ScanInts | scanner.ScanFloats
+
+	// Customize what characters are considered part of identifiers
+	s.IsIdentRune = func(ch rune, i int) bool {
+		return unicode.IsLetter(ch) || unicode.IsDigit(ch) || ch == '\''
+	}
 
 	var tokens []string
 	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {

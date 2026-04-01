@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
@@ -42,11 +43,26 @@ func main() {
 
 	switch words[0] {
 	case "learn":
-		_, err = repl.Learn(apiCfg.db, words[1:])
+		processedWords, err := repl.Learn(apiCfg.db, words[1:])
+		if err != nil {
+			log.Fatal("couldn't process the words")
+		}
+		sentence := repl.BackToSentence(processedWords)
+		println(sentence)
 	case "mark":
-
+		if len(words) == 2 {
+			repl.Mark(apiCfg.db, words[1])
+		} else {
+			fmt.Println("too many or too few words!")
+		}
 	case "lookup":
 
+	case "resetdb":
+		err := apiCfg.db.ResetWords(context.Background())
+		if err != nil {
+			log.Fatal("couldn't reset the db")
+		}
+		fmt.Println("db was succesfully reset!")
 	default:
 		fmt.Println("I dont understand the command")
 
