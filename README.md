@@ -7,6 +7,12 @@ It is intented to be my solely my project, partly for my CV and partly for my us
 No AI was used for generating this code, it might be slop, but it's my slop. AI was used only for help with direction and what to focus on. And occasionly
 the sneaky bugs:) 
 
+MagisterLinguae is based on the input theory learn more here: https://en.wikipedia.org/wiki/Input_hypothesis MagisterLinguae is supposed to help u in this process
+by marking which words u know, how often u encounter these words and single out the most frequent unknown ones if needed and also refresh the ones u have not seen a lot time.
+The more u use it, the more useful the app will be. The goal is to get you to the point u understand most of the commonly used language, the grade reading goal is at least B1. 
+Then you can start learning grammar and practice your output, but not here, there is no grammar or no place for your output. There will be an option for dictionary translation,
+but only for single words or short phrases, you're not really supposed to translate whole sentences. 
+
 The project is written in Go, as it's my most used language, the first iteration will be a CLI, REPL and UI will be coming later.
 
 This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
@@ -26,9 +32,12 @@ These all will be updated depending on what is completed and what new comes up
 - refactorization of the code, make it simpler, cleaner and more readable
 - probably REPL, makes the use of program very easier, at least for marking
 - prompting the user to mark words as known after reaching certain frequency of the word
+- ranking the words based on frequency, especially the unknown ones, so you know which one to learn
+- subtitles and youtube transcript compatibility 
 - supporting other languages
 - dictionary api
 - quiz based on words u know and have not seen for a long time, kinda like anki or something like that
+- L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books)
 
 (The holy grail)
 - web UI
