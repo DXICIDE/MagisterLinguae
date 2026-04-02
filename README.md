@@ -30,6 +30,7 @@ These all will be updated depending on what is completed and what new comes up
 ### Future features:
 (based on priority and its complexity, most important and least complex are on top)
 - refactorization of the code, make it simpler, cleaner and more readable
+- lookup, u can search word words in db, if they are there or not and the last time u seen them + frequency
 - probably REPL, makes the use of program very easier, at least for marking
 - prompting the user to mark words as known after reaching certain frequency of the word
 - ranking the words based on frequency, especially the unknown ones, so you know which one to learn

@@ -31,11 +31,16 @@ func main() {
 		fmt.Printf("Couldn't connect to the DB: %s", err)
 	}
 
+	//loading db to apiconfig, its still a work in progress, just a reminder to make the web ui in the future
 	dbQueries := database.New(db)
 	apiCfg := &apiConfig{}
 	apiCfg.db = dbQueries
 
 	//CLI main
+	replfunc(apiCfg)
+}
+
+func replfunc(apiCfg *apiConfig) {
 	words := repl.Scan()
 	if len(words) == 0 {
 		fmt.Println("Nothing was inputed")
@@ -47,14 +52,17 @@ func main() {
 		if err != nil {
 			log.Fatal("couldn't process the words")
 		}
+
 		sentence := repl.BackToSentence(processedWords)
 		println(sentence)
+
 	case "mark":
 		if len(words) == 2 {
 			repl.Mark(apiCfg.db, words[1])
 		} else {
 			fmt.Println("too many or too few words!")
 		}
+
 	case "lookup":
 
 	case "resetdb":
@@ -63,6 +71,7 @@ func main() {
 			log.Fatal("couldn't reset the db")
 		}
 		fmt.Println("db was succesfully reset!")
+
 	default:
 		fmt.Println("I dont understand the command")
 
