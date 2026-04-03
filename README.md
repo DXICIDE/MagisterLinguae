@@ -1,4 +1,4 @@
-# MagisterLinguae 0.1
+# MagisterLinguae 0.12
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
