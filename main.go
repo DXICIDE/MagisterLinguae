@@ -65,7 +65,10 @@ func replfunc(apiCfg *apiConfig) {
 			}
 
 		case "lookup":
-
+			err := repl.LookUpWord(apiCfg.db, words[1])
+			if err != nil {
+				log.Fatal("couldn't lookup the word")
+			}
 		case "resetdb":
 			err := apiCfg.db.ResetWords(context.Background())
 			if err != nil {

@@ -46,6 +46,9 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 			if wordDB.Known == false {
 				wordName = unknownWord(wordName)
 			}
+
+			//update the last time we saw the word and frequency +1
+			db.UpdateWord(context.Background(), wordName)
 			proccesedWords = append(proccesedWords, wordName)
 		}
 	}
