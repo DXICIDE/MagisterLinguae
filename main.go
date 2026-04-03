@@ -36,44 +36,50 @@ func main() {
 	apiCfg := &apiConfig{}
 	apiCfg.db = dbQueries
 
-	//CLI main
+	//REPL main
 	replfunc(apiCfg)
 }
 
 func replfunc(apiCfg *apiConfig) {
-	words := repl.Scan()
-	if len(words) == 0 {
-		fmt.Println("Nothing was inputed")
-	}
-
-	switch words[0] {
-	case "learn":
-		processedWords, err := repl.Learn(apiCfg.db, words[1:])
-		if err != nil {
-			log.Fatal("couldn't process the words")
+	for {
+		words := repl.Scan()
+		if len(words) == 0 {
+			fmt.Println("Nothing was inputed")
 		}
 
-		sentence := repl.BackToSentence(processedWords)
-		println(sentence)
+		switch words[0] {
+		case "learn":
+			processedWords, err := repl.Learn(apiCfg.db, words[1:])
+			if err != nil {
+				log.Fatal("couldn't process the words")
+			}
 
-	case "mark":
-		if len(words) == 2 {
-			repl.Mark(apiCfg.db, words[1])
-		} else {
-			fmt.Println("too many or too few words!")
+			sentence := repl.BackToSentence(processedWords)
+			println(sentence)
+
+		case "mark":
+			if len(words) > 1 {
+				repl.Mark(apiCfg.db, words[1:])
+			} else {
+				fmt.Println("too few words!")
+			}
+
+		case "lookup":
+
+		case "resetdb":
+			err := apiCfg.db.ResetWords(context.Background())
+			if err != nil {
+				log.Fatal("couldn't reset the db")
+			}
+			fmt.Println("db was succesfully reset!")
+		case "q", "quit":
+			fmt.Println("Hope u learned a lot, see you later!")
+			fmt.Println("Goodbye!")
+			return
+
+		default:
+			fmt.Println("I dont understand the command")
+
 		}
-
-	case "lookup":
-
-	case "resetdb":
-		err := apiCfg.db.ResetWords(context.Background())
-		if err != nil {
-			log.Fatal("couldn't reset the db")
-		}
-		fmt.Println("db was succesfully reset!")
-
-	default:
-		fmt.Println("I dont understand the command")
-
 	}
 }
