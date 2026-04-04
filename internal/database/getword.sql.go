@@ -10,7 +10,7 @@ import (
 )
 
 const getWord = `-- name: GetWord :one
-SELECT token_name, last_seen_at, known, frequency FROM words WHERE token_name = $1
+SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark FROM words WHERE token_name = $1
 `
 
 func (q *Queries) GetWord(ctx context.Context, tokenName string) (Word, error) {
@@ -21,6 +21,7 @@ func (q *Queries) GetWord(ctx context.Context, tokenName string) (Word, error) {
 		&i.LastSeenAt,
 		&i.Known,
 		&i.Frequency,
+		&i.PromtedUserToMark,
 	)
 	return i, err
 }

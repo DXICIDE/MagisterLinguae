@@ -43,12 +43,15 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 			//if the word is in db
 		} else {
 			fmt.Printf("Word '%s' already exists\n", wordName)
+
+			//update the last time we saw the word and frequency +1
+			db.UpdateWordSeen(context.Background(), wordName)
+
+			//add brackets
 			if wordDB.Known == false {
 				wordName = unknownWord(wordName)
 			}
 
-			//update the last time we saw the word and frequency +1
-			db.UpdateWord(context.Background(), wordName)
 			proccesedWords = append(proccesedWords, wordName)
 		}
 	}

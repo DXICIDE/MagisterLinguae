@@ -21,6 +21,7 @@ func LookUpWord(db *database.Queries, word string) error {
 		return err
 	}
 
+	//stdout print
 	fmt.Printf("How many times you saw %s: %d\n", word, wordDB.Frequency)
 	if wordDB.Known == true {
 		fmt.Printf("Do you know word %s: Yes\n", word)

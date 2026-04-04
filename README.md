@@ -1,11 +1,11 @@
-# MagisterLinguae 0.12
+# MagisterLinguae 0.2
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
 The project is my attempt at creating language learning engine fitting for my needs. Any features added will fit my use case.
 It is intented to be my solely my project, partly for my CV and partly for my use. But feel free to fork it or use it as u wish.
 No AI was used for generating this code, it might be slop, but it's my slop. AI was used only for help with direction and what to focus on. And occasionly
-the sneaky bugs:) 
+the sneaky bugs and for some ideas how to refactor my code. No code generated, or altered by AI:)
 
 MagisterLinguae is based on the input theory learn more here: https://en.wikipedia.org/wiki/Input_hypothesis MagisterLinguae is supposed to help u in this process
 by marking which words u know, how often u encounter these words and single out the most frequent unknown ones if needed and also refresh the ones u have not seen a lot time.
@@ -18,6 +18,9 @@ The project is written in Go, as it's my most used language, the first iteration
 This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
 not stay the same in the release of 1.0
 
+Current version is 0.2, it is version that should have the core of the project fully completed. The minimum features for this project to be functional and usable has been added,
+next is tests and refactor, because I frankly hate how the current version is starting to become confusing. That should be the final verison of the 0.2 tag. But anyone can technically use this version to learn languages, it tracks anything necessary. So I shall refine upon this version and add more features to make this even easier and better for the user. Godspeed.
+
 ## Current features: 
 - The program can recognise words (case insensitive) which are then stored in db
 - Words are stored stored with boolean known and unknown, user marks words that he knows, any other are unknown*
@@ -29,10 +32,12 @@ not stay the same in the release of 1.0
 These all will be updated depending on what is completed and what new comes up
 ### Future features:
 (based on priority and its complexity, most important and least complex are on top)
-- refactorization of the code, make it simpler, cleaner and more readable ✅
+- refactorization of the code, make it simpler, cleaner and more readable ✅ -- needs part 2, the code is starting to be confusing again. I'll need to focus on breaking down the long functions
 - lookup, u can search word words in db, if they are there or not and the last time u seen them + frequency ✅
 - probably REPL, makes the use of program very easier, at least for marking ✅
-- prompting the user to mark words as known after reaching certain frequency of the word
+- prompting the user to mark words as known after reaching certain frequency of the word ✅
+- tests
+- user manually changing the words he forgot to unknown
 - ranking the words based on frequency, especially the unknown ones, so you know which one to learn
 - subtitles and youtube transcript compatibility 
 - supporting other languages

@@ -9,8 +9,9 @@ import (
 )
 
 type Word struct {
-	TokenName  string
-	LastSeenAt time.Time
-	Known      bool
-	Frequency  int32
+	TokenName         string
+	LastSeenAt        time.Time
+	Known             bool
+	Frequency         int32
+	PromtedUserToMark bool
 }

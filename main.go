@@ -57,6 +57,11 @@ func replfunc(apiCfg *apiConfig) {
 			sentence := repl.BackToSentence(processedWords)
 			println(sentence)
 
+			err = repl.Markfrequency(apiCfg.db)
+			if err != nil {
+				log.Fatal("couldn't prompt the user to mark the word")
+			}
+
 		case "mark":
 			if len(words) > 1 {
 				repl.Mark(apiCfg.db, words[1:])
