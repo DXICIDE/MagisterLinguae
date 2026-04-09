@@ -39,6 +39,7 @@ These all will be updated depending on what is completed and what new comes up
 - tests
 - user manually changing the words he forgot to unknown
 - ranking the words based on frequency, especially the unknown ones, so you know which one to learn
+- add support for files
 - subtitles and youtube transcript compatibility 
 - supporting other languages
 - dictionary api

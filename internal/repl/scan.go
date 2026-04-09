@@ -3,15 +3,15 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"os"
+	"io"
 	"strings"
 	"text/scanner"
 	"unicode"
 )
 
-func Scan() []string {
+func Scan(r io.Reader) []string {
 	fmt.Print("> ")
-	scan := bufio.NewScanner(os.Stdin)
+	scan := bufio.NewScanner(r)
 	if !scan.Scan() {
 		return nil
 	}

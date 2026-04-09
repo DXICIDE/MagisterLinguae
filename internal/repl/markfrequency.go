@@ -3,6 +3,7 @@ package repl
 import (
 	"context"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
@@ -24,7 +25,7 @@ func Markfrequency(db *database.Queries) error {
 			fmt.Printf("Do you wish to mark word: %s as known?(Y/N)\n", word.TokenName)
 
 			//wait for input
-			scanned := Scan()
+			scanned := Scan(os.Stdin)
 			if len(scanned) != 1 {
 				fmt.Println("Too many or too few words!")
 				continue

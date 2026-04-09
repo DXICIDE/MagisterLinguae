@@ -42,7 +42,7 @@ func main() {
 
 func replfunc(apiCfg *apiConfig) {
 	for {
-		words := repl.Scan()
+		words := repl.Scan(os.Stdin)
 		if len(words) == 0 {
 			fmt.Println("Nothing was inputed")
 		}
