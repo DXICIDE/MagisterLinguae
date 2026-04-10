@@ -10,18 +10,20 @@ import (
 )
 
 func Mark(db *database.Queries, words []string) error {
-	for _, word := range words {
-		word = strings.ToLower(word)
+	for _, v := range words {
+		word := strings.ToLower(v)
 
 		wordDB, err := db.GetWord(context.Background(), word)
 		if err == sql.ErrNoRows {
 			err = createWordDB(word, db, true)
-			return err
+			if err != nil {
+				return nil
+			}
 		}
 
 		err = db.UpdateWordKnown(context.Background(), wordDB.TokenName)
 		if err != nil {
-			return err
+			return nil
 		}
 	}
 	return nil

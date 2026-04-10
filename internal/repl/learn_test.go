@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-func TestLearnWithRealDB(t *testing.T) {
+func TestLearn(t *testing.T) {
 	tests := map[string]struct {
 		input      string
 		knownWords []string
