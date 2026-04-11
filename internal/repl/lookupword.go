@@ -10,26 +10,25 @@ import (
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
-func LookUpWord(db *database.Queries, word string) error {
+func LookUpWord(db *database.Queries, word string) (string, error) {
 	word = strings.ToLower(word)
 
 	wordDB, err := db.GetWord(context.Background(), word)
 	if err == sql.ErrNoRows {
-		fmt.Printf("Word %s not found\n", word)
-		return nil
+		return fmt.Sprintf("Word %s not found\n", word), nil
 	} else if err != nil {
-		return err
+		return "", err
+	}
+
+	known := "No"
+	if wordDB.Known {
+		known = "Yes"
 	}
 
 	//stdout print
-	fmt.Printf("How many times you saw %s: %d\n", word, wordDB.Frequency)
-	if wordDB.Known == true {
-		fmt.Printf("Do you know word %s: Yes\n", word)
-	} else {
-		fmt.Printf("Do you know word %s: No\n", word)
-	}
+	result := fmt.Sprintf("How many times you saw %s: %d\n", word, wordDB.Frequency)
+	result += fmt.Sprintf("Do you know word %s: %s\n", word, known)
+	result += fmt.Sprintf("Last time you saw %s: %s", word, wordDB.LastSeenAt.Format(time.RFC822))
 
-	fmt.Printf("Last time you saw %s: ", word)
-	fmt.Println(wordDB.LastSeenAt.Format(time.RFC822))
-	return nil
+	return result, nil
 }
