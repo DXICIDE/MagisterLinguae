@@ -49,12 +49,6 @@ func replfunc(apiCfg *apiConfig) {
 
 		switch words[0] {
 		case "learn":
-			if words[1] == "--file" {
-				_, err := repl.LearnFromFile(apiCfg.db, words[2])
-				if err != nil {
-					log.Fatal("couldn't process the file")
-				}
-			}
 			sentence, err := repl.Learn(apiCfg.db, words[1:])
 			if err != nil {
 				log.Fatal("couldn't process the words")
@@ -66,6 +60,12 @@ func replfunc(apiCfg *apiConfig) {
 			if err != nil {
 				log.Fatal("couldn't prompt the user to mark the word")
 			}
+		case "learnfile":
+			_, err := repl.LearnFromFile(apiCfg.db, words[1:])
+			if err != nil {
+				log.Fatalf("couldn't process the file: %s", err)
+			}
+			return
 
 		case "mark":
 			if len(words) > 1 {
