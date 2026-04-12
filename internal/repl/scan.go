@@ -9,13 +9,17 @@ import (
 	"unicode"
 )
 
+// stdin scan
 func Scan(r io.Reader) []string {
 	fmt.Print("> ")
 	scan := bufio.NewScanner(r)
 	if !scan.Scan() {
 		return nil
 	}
-	line := scan.Text()
+	return tokenizeString(scan.Text())
+}
+
+func tokenizeString(line string) []string {
 	line = strings.TrimSpace(line)
 	if line == "" {
 		return nil
@@ -34,5 +38,10 @@ func Scan(r io.Reader) []string {
 	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {
 		tokens = append(tokens, s.TokenText())
 	}
+
+	if len(tokens) == 0 {
+		fmt.Println("Nothing was inputed")
+	}
+
 	return tokens
 }
