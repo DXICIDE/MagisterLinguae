@@ -13,24 +13,24 @@ func TestLearn(t *testing.T) {
 	tests := map[string]struct {
 		input      string
 		knownWords []string
-		wantWords  []string
+		wantWords  string
 		wantInDB   []string
 	}{
 		"simple": {
 			input:     "una ristorante",
-			wantWords: []string{"[una]", "[ristorante]"},
+			wantWords: "[una] [ristorante]",
 			wantInDB:  []string{"una", "ristorante"},
 		},
 		"known": {
 			input:      "una scuola",
 			knownWords: []string{"scuola"},
-			wantWords:  []string{"[una]", "scuola"},
+			wantWords:  "[una] scuola",
 			wantInDB:   []string{"una", "scuola"},
 		},
 		"combination": {
 			input:      "Buongiorno! Oggi vi presento la mia famiglia. C'e vi",
 			knownWords: []string{"oggi", "presento"},
-			wantWords:  []string{"[Buongiorno]", "!", "Oggi", "[vi]", "presento", "[la]", "[mia]", "[famiglia]", ".", "[C'e]", "[vi]"},
+			wantWords:  "[Buongiorno]! Oggi [vi] presento [la] [mia] [famiglia]. [C'e] [vi]",
 			wantInDB:   []string{"buongiorno", "oggi", "vi", "presento", "la", "mia", "famiglia", "c'e"},
 		},
 	}

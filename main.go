@@ -49,12 +49,17 @@ func replfunc(apiCfg *apiConfig) {
 
 		switch words[0] {
 		case "learn":
-			processedWords, err := repl.Learn(apiCfg.db, words[1:])
+			if words[1] == "--file" {
+				_, err := repl.LearnFromFile(apiCfg.db, words[2])
+				if err != nil {
+					log.Fatal("couldn't process the file")
+				}
+			}
+			sentence, err := repl.Learn(apiCfg.db, words[1:])
 			if err != nil {
 				log.Fatal("couldn't process the words")
 			}
 
-			sentence := repl.BackToSentence(processedWords)
 			println(sentence)
 
 			err = repl.Markfrequency(apiCfg.db)

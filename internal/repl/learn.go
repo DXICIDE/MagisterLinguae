@@ -9,7 +9,7 @@ import (
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
-func Learn(db *database.Queries, words []string) ([]string, error) {
+func Learn(db *database.Queries, words []string) (string, error) {
 
 	var proccesedWords []string
 
@@ -30,7 +30,7 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 			fmt.Printf("Word %s not found\n", wordName)
 			err = createWordDB(word, db, false)
 			if err != nil {
-				return nil, err
+				return "", err
 			}
 
 			wordName = unknownWord(wordName)
@@ -38,7 +38,7 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 
 			//other errors
 		} else if err != nil {
-			return nil, fmt.Errorf("database error getting word '%s': %w", wordName, err)
+			return "", fmt.Errorf("database error getting word '%s': %w", wordName, err)
 
 			//if the word is in db
 		} else {
@@ -55,8 +55,9 @@ func Learn(db *database.Queries, words []string) ([]string, error) {
 			proccesedWords = append(proccesedWords, wordName)
 		}
 	}
+	sentence := BackToSentence(proccesedWords)
 
-	return proccesedWords, nil
+	return sentence, nil
 }
 
 // adds a brackets if the word is unknown
