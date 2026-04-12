@@ -43,9 +43,6 @@ func main() {
 func replfunc(apiCfg *apiConfig) {
 	for {
 		words := repl.Scan(os.Stdin)
-		if len(words) == 0 {
-			fmt.Println("Nothing was inputed")
-		}
 
 		switch words[0] {
 		case "learn":
@@ -60,12 +57,19 @@ func replfunc(apiCfg *apiConfig) {
 			if err != nil {
 				log.Fatal("couldn't prompt the user to mark the word")
 			}
+
 		case "learnfile":
-			_, err := repl.LearnFromFile(apiCfg.db, words[1:])
+			sentence, err := repl.LearnFromFile(apiCfg.db, words[1:])
 			if err != nil {
 				log.Fatalf("couldn't process the file: %s", err)
 			}
-			return
+
+			println(sentence)
+
+			err = repl.Markfrequency(apiCfg.db)
+			if err != nil {
+				log.Fatal("couldn't prompt the user to mark the word")
+			}
 
 		case "mark":
 			if len(words) > 1 {

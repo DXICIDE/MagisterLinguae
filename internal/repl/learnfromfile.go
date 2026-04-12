@@ -2,7 +2,6 @@ package repl
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
@@ -22,13 +21,22 @@ func LearnFromFile(db *database.Queries, filepath []string) (string, error) {
 	defer file.Close()
 	r := bufio.NewReader(file)
 
+	var words []string
+	var sentence string
+	var paragraphs string
+
 	for {
 		line, err := r.ReadString('\n')
 		if err != nil {
+			words = tokenizeString(line)
+			sentence, err = Learn(db, words)
+			paragraphs += sentence
 			break
 		}
-
-		fmt.Print(line)
+		words = tokenizeString(line)
+		sentence, err = Learn(db, words)
+		sentence = sentence + "\n"
+		paragraphs += sentence
 	}
-	return "", nil
+	return paragraphs, nil
 }
