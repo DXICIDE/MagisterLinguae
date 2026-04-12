@@ -43,7 +43,10 @@ func main() {
 func replfunc(apiCfg *apiConfig) {
 	for {
 		words := repl.Scan(os.Stdin)
-
+		if len(words) == 0 {
+			repl.Help()
+			return
+		}
 		switch words[0] {
 		case "learn":
 			sentence, err := repl.Learn(apiCfg.db, words[1:])
@@ -115,6 +118,12 @@ func replfunc(apiCfg *apiConfig) {
 			fmt.Println("Hope u learned a lot, see you later!")
 			fmt.Println("Goodbye!")
 			return
+
+		case "help":
+			repl.Help()
+
+		case "deephelp":
+			repl.DeepHelp()
 
 		default:
 			fmt.Println("I dont understand the command")
