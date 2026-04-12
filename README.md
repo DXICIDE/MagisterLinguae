@@ -1,4 +1,4 @@
-# MagisterLinguae 0.2
+# MagisterLinguae 0.3
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
@@ -18,8 +18,7 @@ The project is written in Go, as it's my most used language, the first iteration
 This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
 not stay the same in the release of 1.0
 
-Current version is 0.2, it is version that should have the core of the project fully completed. The minimum features for this project to be functional and usable has been added,
-next is tests and refactor, because I frankly hate how the current version is starting to become confusing. That should be the final verison of the 0.2 tag. But anyone can technically use this version to learn languages, it tracks anything necessary. So I shall refine upon this version and add more features to make this even easier and better for the user. Godspeed.
+Current version is 0.3, added support for files, tests are not finished and I have not yet tried to test db, it's probably not necessary right now. I now decided against refactoring the project. I think it's better to finish this even though it's sloppy otherwise I would refactor it again and again till I grew old. I will now finish all the remaining things in future features and get to UI.
 
 ## Current features: 
 - The program can recognise words (case insensitive) which are then stored in db
@@ -36,10 +35,10 @@ These all will be updated depending on what is completed and what new comes up
 - lookup, u can search word words in db, if they are there or not and the last time u seen them + frequency ✅
 - probably REPL, makes the use of program very easier, at least for marking ✅
 - prompting the user to mark words as known after reaching certain frequency of the word ✅
-- tests
+- tests ✅
 - user manually changing the words he forgot to unknown
 - ranking the words based on frequency, especially the unknown ones, so you know which one to learn
-- add support for files
+- add support for files ✅
 - subtitles and youtube transcript compatibility 
 - supporting other languages
 - dictionary api
