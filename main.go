@@ -73,7 +73,20 @@ func replfunc(apiCfg *apiConfig) {
 
 		case "mark":
 			if len(words) > 1 {
-				repl.Mark(apiCfg.db, words[1:])
+				err := repl.Mark(apiCfg.db, words[1:])
+				if err != nil {
+					log.Fatal("couldn't mark the word as known")
+				}
+			} else {
+				fmt.Println("too few words!")
+			}
+
+		case "unmark":
+			if len(words) > 1 {
+				err := repl.UnMark(apiCfg.db, words[1:])
+				if err != nil {
+					log.Fatal("couldn't mark the word as known")
+				}
 			} else {
 				fmt.Println("too few words!")
 			}
@@ -84,12 +97,14 @@ func replfunc(apiCfg *apiConfig) {
 				log.Fatal("couldn't lookup the word")
 			}
 			fmt.Println(printstring)
+
 		case "resetdb":
 			err := apiCfg.db.ResetWords(context.Background())
 			if err != nil {
 				log.Fatal("couldn't reset the db")
 			}
 			fmt.Println("db was succesfully reset!")
+
 		case "q", "quit":
 			fmt.Println("Hope u learned a lot, see you later!")
 			fmt.Println("Goodbye!")

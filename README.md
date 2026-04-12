@@ -36,7 +36,7 @@ These all will be updated depending on what is completed and what new comes up
 - probably REPL, makes the use of program very easier, at least for marking ✅
 - prompting the user to mark words as known after reaching certain frequency of the word ✅
 - tests ✅
-- user manually changing the words he forgot to unknown
+- user manually changing the words he forgot to unknown ✅
 - ranking the words based on frequency, especially the unknown ones, so you know which one to learn
 - add support for files ✅
 - subtitles and youtube transcript compatibility 
