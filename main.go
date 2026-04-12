@@ -98,10 +98,16 @@ func replfunc(apiCfg *apiConfig) {
 			}
 			fmt.Println(printstring)
 
+		case "list":
+			err := repl.ListByFrequency(apiCfg.db)
+			if err != nil {
+				log.Fatalf("couldn't list the words: %s", err)
+			}
+
 		case "resetdb":
 			err := apiCfg.db.ResetWords(context.Background())
 			if err != nil {
-				log.Fatal("couldn't reset the db")
+				log.Fatalf("couldn't reset the db: %s", err)
 			}
 			fmt.Println("db was succesfully reset!")
 
