@@ -3,12 +3,10 @@ package repl
 import (
 	"context"
 	"fmt"
-
-	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
-func ListByFrequency(db *database.Queries) error {
-	words, err := db.GetListByFrequency(context.Background())
+func (state *AppState) ListByFrequency() error {
+	words, err := state.Db.GetListByFrequency(context.Background())
 	if err != nil {
 		return err
 	}

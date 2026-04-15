@@ -10,7 +10,7 @@ import (
 )
 
 const getListByFrequency = `-- name: GetListByFrequency :many
-SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark FROM words WHERE frequency > 1 ORDER BY known ASC, frequency DESC
+SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words WHERE frequency > 1 ORDER BY known ASC, frequency DESC
 `
 
 func (q *Queries) GetListByFrequency(ctx context.Context) ([]Word, error) {
@@ -28,6 +28,7 @@ func (q *Queries) GetListByFrequency(ctx context.Context) ([]Word, error) {
 			&i.Known,
 			&i.Frequency,
 			&i.PromtedUserToMark,
+			&i.LanguageID,
 		); err != nil {
 			return nil, err
 		}

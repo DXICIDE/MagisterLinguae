@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-func TestLearn(t *testing.T) {
+func (state *AppState) TestLearn(t *testing.T) {
 	tests := map[string]struct {
 		input      string
 		knownWords []string
@@ -40,7 +40,7 @@ func TestLearn(t *testing.T) {
 			//setup the db and scan the input
 			dbQueries := setupTestDB(t)
 			reader := strings.NewReader(tc.input)
-			words := Scan(reader)
+			words := state.Scan(reader)
 
 			//add known words, if there are any
 			for _, w := range tc.knownWords {
@@ -51,7 +51,7 @@ func TestLearn(t *testing.T) {
 			}
 
 			//testing the learn
-			got, err := Learn(dbQueries, words)
+			got, err := state.Learn(words)
 			if err != nil {
 				t.Fatalf("Learn failed: %s", err)
 			}

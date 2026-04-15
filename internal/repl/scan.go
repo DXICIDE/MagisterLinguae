@@ -10,16 +10,16 @@ import (
 )
 
 // stdin scan
-func Scan(r io.Reader) []string {
+func (state *AppState) Scan(r io.Reader) []string {
 	fmt.Print("> ")
 	scan := bufio.NewScanner(r)
 	if !scan.Scan() {
 		return nil
 	}
-	return tokenizeString(scan.Text())
+	return state.tokenizeString(scan.Text())
 }
 
-func tokenizeString(line string) []string {
+func (state *AppState) tokenizeString(line string) []string {
 	line = strings.TrimSpace(line)
 	if line == "" {
 		return nil

@@ -9,19 +9,19 @@ import (
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
-func Mark(db *database.Queries, words []string) error {
+func (state *AppState) Mark(words []string) error {
 	for _, v := range words {
 		word := strings.ToLower(v)
 
-		wordDB, err := db.GetWord(context.Background(), word)
+		wordDB, err := state.Db.GetWord(context.Background(), word)
 		if err == sql.ErrNoRows {
-			err = createWordDB(word, db, true)
+			err = createWordDB(word, state.Db, true)
 			if err != nil {
 				return nil
 			}
 		}
 
-		err = db.UpdateWordKnown(context.Background(), wordDB.TokenName)
+		err = state.Db.UpdateWordKnown(context.Background(), wordDB.TokenName)
 		if err != nil {
 			return nil
 		}

@@ -13,10 +13,6 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-type apiConfig struct {
-	db *database.Queries
-}
-
 func main() {
 	//loading .env
 	err := godotenv.Load()
@@ -31,52 +27,64 @@ func main() {
 		fmt.Printf("Couldn't connect to the DB: %s", err)
 	}
 
-	//loading db to apiconfig, its still a work in progress, just a reminder to make the web ui in the future
+	//loading db to Appstate, loads the db and the language
 	dbQueries := database.New(db)
-	apiCfg := &apiConfig{}
-	apiCfg.db = dbQueries
+	state := &repl.AppState{}
+	state.Db = dbQueries
+	if os.Getenv("LAST_LANG") == "" {
+		language, err := state.SelectLang()
+		if err != nil {
+			log.Fatalf("%s", err)
+		}
+		state.CurrentLanguage = language
+	}
+	language := os.Getenv("LAST_LANG")
+	dbQueries.GetLanguageByCode(context.Background(), language)
+
+	fmt.Printf("Current language used is %s, change the language using the command switch\n", state.CurrentLanguage.Name)
+	fmt.Println("Good luck with learning!")
 
 	//REPL main
-	replfunc(apiCfg)
+	Replfunc(state)
 }
 
-func replfunc(apiCfg *apiConfig) {
+func Replfunc(state *repl.AppState) {
 	for {
-		words := repl.Scan(os.Stdin)
+		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
 			repl.Help()
 			return
 		}
 		switch words[0] {
 		case "learn":
-			sentence, err := repl.Learn(apiCfg.db, words[1:])
+			sentence, err := state.Learn(words[1:])
 			if err != nil {
 				log.Fatal("couldn't process the words")
 			}
 
 			println(sentence)
 
-			err = repl.Markfrequency(apiCfg.db)
+			err = state.Markfrequency()
 			if err != nil {
 				log.Fatal("couldn't prompt the user to mark the word")
 			}
 
 		case "learnfile":
-			sentence, err := repl.LearnFromFile(apiCfg.db, words[1:])
+			sentence, err := state.LearnFromFile(words[1:])
 			if err != nil {
 				log.Fatalf("couldn't process the file: %s", err)
 			}
 
 			println(sentence)
 
-			err = repl.Markfrequency(apiCfg.db)
+			err = state.Markfrequency()
 			if err != nil {
 				log.Fatal("couldn't prompt the user to mark the word")
 			}
 
 		case "mark":
 			if len(words) > 1 {
-				err := repl.Mark(apiCfg.db, words[1:])
+				err := state.Mark(words[1:])
 				if err != nil {
 					log.Fatal("couldn't mark the word as known")
 				}
@@ -86,7 +94,7 @@ func replfunc(apiCfg *apiConfig) {
 
 		case "unmark":
 			if len(words) > 1 {
-				err := repl.UnMark(apiCfg.db, words[1:])
+				err := state.UnMark(words[1:])
 				if err != nil {
 					log.Fatal("couldn't mark the word as known")
 				}
@@ -95,20 +103,20 @@ func replfunc(apiCfg *apiConfig) {
 			}
 
 		case "lookup":
-			printstring, err := repl.LookUpWord(apiCfg.db, words[1])
+			printstring, err := state.LookUpWord(words[1])
 			if err != nil {
 				log.Fatal("couldn't lookup the word")
 			}
 			fmt.Println(printstring)
 
 		case "list":
-			err := repl.ListByFrequency(apiCfg.db)
+			err := state.ListByFrequency()
 			if err != nil {
 				log.Fatalf("couldn't list the words: %s", err)
 			}
 
 		case "resetdb":
-			err := apiCfg.db.ResetWords(context.Background())
+			err := state.Db.ResetWords(context.Background())
 			if err != nil {
 				log.Fatalf("couldn't reset the db: %s", err)
 			}
@@ -118,6 +126,13 @@ func replfunc(apiCfg *apiConfig) {
 			fmt.Println("Hope u learned a lot, see you later!")
 			fmt.Println("Goodbye!")
 			return
+
+		case "switch":
+			language, err := state.SelectLang()
+			if err != nil {
+				log.Fatalf("%s", err)
+			}
+			state.CurrentLanguage = language
 
 		case "help":
 			repl.Help()

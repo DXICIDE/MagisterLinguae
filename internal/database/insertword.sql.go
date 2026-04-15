@@ -17,7 +17,7 @@ VALUES (
     $2,
     1
 )
-RETURNING token_name, last_seen_at, known, frequency, promted_user_to_mark
+RETURNING token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id
 `
 
 type CreateWordParams struct {
@@ -34,6 +34,7 @@ func (q *Queries) CreateWord(ctx context.Context, arg CreateWordParams) (Word, e
 		&i.Known,
 		&i.Frequency,
 		&i.PromtedUserToMark,
+		&i.LanguageID,
 	)
 	return i, err
 }

@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-func TestMark(t *testing.T) {
+func (state *AppState) TestMark(t *testing.T) {
 	tests := map[string]struct {
 		input      string
 		wordToMark []string
@@ -30,10 +30,10 @@ func TestMark(t *testing.T) {
 			//setup the db and scan the input
 			dbQueries := setupTestDB(t)
 			reader := strings.NewReader(tc.input)
-			words := Scan(reader)
+			words := state.Scan(reader)
 
 			//add known words, if there are any
-			err := Mark(dbQueries, tc.wordToMark)
+			err := state.Mark(tc.wordToMark)
 			if err != nil {
 				t.Fatalf("setup failed")
 			}

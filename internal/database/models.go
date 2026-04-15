@@ -8,10 +8,17 @@ import (
 	"time"
 )
 
+type Language struct {
+	ID   int32
+	Code string
+	Name string
+}
+
 type Word struct {
 	TokenName         string
 	LastSeenAt        time.Time
 	Known             bool
 	Frequency         int32
 	PromtedUserToMark bool
+	LanguageID        int32
 }

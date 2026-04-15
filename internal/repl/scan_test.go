@@ -7,7 +7,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestScan(t *testing.T) {
+func (state *AppState) TestScan(t *testing.T) {
 	tests := map[string]struct {
 		input string
 		want  []string
@@ -22,7 +22,7 @@ func TestScan(t *testing.T) {
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
 			reader := strings.NewReader(tc.input)
-			got := Scan(reader)
+			got := state.Scan(reader)
 			diff := cmp.Diff(tc.want, got)
 			if diff != "" {
 				t.Fatalf("%s", diff)

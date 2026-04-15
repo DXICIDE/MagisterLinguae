@@ -10,7 +10,7 @@ import (
 )
 
 const markWordsByFrequency = `-- name: MarkWordsByFrequency :many
-SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark FROM words WHERE frequency = 7 AND known = false AND promted_user_to_mark = false
+SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words WHERE frequency = 7 AND known = false AND promted_user_to_mark = false
 `
 
 func (q *Queries) MarkWordsByFrequency(ctx context.Context) ([]Word, error) {
@@ -28,6 +28,7 @@ func (q *Queries) MarkWordsByFrequency(ctx context.Context) ([]Word, error) {
 			&i.Known,
 			&i.Frequency,
 			&i.PromtedUserToMark,
+			&i.LanguageID,
 		); err != nil {
 			return nil, err
 		}

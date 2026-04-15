@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-func TestLookUpWord(t *testing.T) {
+func (state *AppState) TestLookUpWord(t *testing.T) {
 	dbQueries := setupTestDB(t)
 
 	// Insert test word
@@ -24,18 +24,18 @@ func TestLookUpWord(t *testing.T) {
 
 	words := make([]string, 2)
 	words[0] = "hello"
-	Learn(dbQueries, words)
+	state.Learn(words)
 	words[1] = "polo"
-	Learn(dbQueries, words)
-	Learn(dbQueries, words)
+	state.Learn(words)
+	state.Learn(words)
 
 	// Test
-	outputhello, err := LookUpWord(dbQueries, "hello")
+	outputhello, err := state.LookUpWord("hello")
 	if err != nil {
 		t.Fatalf("unexpected error: %s", err)
 	}
 
-	outputpolo, err := LookUpWord(dbQueries, "polo")
+	outputpolo, err := state.LookUpWord("polo")
 	if err != nil {
 		t.Fatalf("unexpected error: %s", err)
 	}

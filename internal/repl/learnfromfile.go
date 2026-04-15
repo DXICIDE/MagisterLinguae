@@ -3,11 +3,9 @@ package repl
 import (
 	"bufio"
 	"os"
-
-	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
-func LearnFromFile(db *database.Queries, filepath []string) (string, error) {
+func (state *AppState) LearnFromFile(filepath []string) (string, error) {
 	var path string
 	for _, v := range filepath {
 		path += v
@@ -28,13 +26,13 @@ func LearnFromFile(db *database.Queries, filepath []string) (string, error) {
 	for {
 		line, err := r.ReadString('\n')
 		if err != nil {
-			words = tokenizeString(line)
-			sentence, err = Learn(db, words)
+			words = state.tokenizeString(line)
+			sentence, err = state.Learn(words)
 			paragraphs += sentence
 			break
 		}
-		words = tokenizeString(line)
-		sentence, err = Learn(db, words)
+		words = state.tokenizeString(line)
+		sentence, err = state.Learn(words)
 		sentence = sentence + "\n"
 		paragraphs += sentence
 	}
