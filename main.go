@@ -13,6 +13,10 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
+type UserConfig struct {
+	LastLanguage string `json:"last_language"`
+}
+
 func main() {
 	//loading .env
 	err := godotenv.Load()
@@ -31,118 +35,36 @@ func main() {
 	dbQueries := database.New(db)
 	state := &repl.AppState{}
 	state.Db = dbQueries
-	if os.Getenv("LAST_LANG") == "" {
-		language, err := state.SelectLang()
-		if err != nil {
-			log.Fatalf("%s", err)
-		}
-		state.CurrentLanguage = language
+
+	//loading config
+	userConfig, err := state.GetConfig()
+	if err != nil {
+		log.Fatalf("%s", err)
 	}
-	language := os.Getenv("LAST_LANG")
-	dbQueries.GetLanguageByCode(context.Background(), language)
+
+	//loading last language used
+	language := LastLanguage(userConfig, state)
+	state.CurrentLanguage = language
 
 	fmt.Printf("Current language used is %s, change the language using the command switch\n", state.CurrentLanguage.Name)
 	fmt.Println("Good luck with learning!")
 
 	//REPL main
-	Replfunc(state)
+	repl.Replfunc(state)
 }
 
-func Replfunc(state *repl.AppState) {
-	for {
-		words := state.Scan(os.Stdin)
-		if len(words) == 0 {
-			repl.Help()
-			return
+func LastLanguage(userConfig repl.Config, state *repl.AppState) database.Language {
+	if userConfig.LastLanguage == "" {
+		language, err := state.SelectLang()
+		if err != nil {
+			log.Fatalf("%s", err)
 		}
-		switch words[0] {
-		case "learn":
-			sentence, err := state.Learn(words[1:])
-			if err != nil {
-				log.Fatal("couldn't process the words")
-			}
-
-			println(sentence)
-
-			err = state.Markfrequency()
-			if err != nil {
-				log.Fatal("couldn't prompt the user to mark the word")
-			}
-
-		case "learnfile":
-			sentence, err := state.LearnFromFile(words[1:])
-			if err != nil {
-				log.Fatalf("couldn't process the file: %s", err)
-			}
-
-			println(sentence)
-
-			err = state.Markfrequency()
-			if err != nil {
-				log.Fatal("couldn't prompt the user to mark the word")
-			}
-
-		case "mark":
-			if len(words) > 1 {
-				err := state.Mark(words[1:])
-				if err != nil {
-					log.Fatal("couldn't mark the word as known")
-				}
-			} else {
-				fmt.Println("too few words!")
-			}
-
-		case "unmark":
-			if len(words) > 1 {
-				err := state.UnMark(words[1:])
-				if err != nil {
-					log.Fatal("couldn't mark the word as known")
-				}
-			} else {
-				fmt.Println("too few words!")
-			}
-
-		case "lookup":
-			printstring, err := state.LookUpWord(words[1])
-			if err != nil {
-				log.Fatal("couldn't lookup the word")
-			}
-			fmt.Println(printstring)
-
-		case "list":
-			err := state.ListByFrequency()
-			if err != nil {
-				log.Fatalf("couldn't list the words: %s", err)
-			}
-
-		case "resetdb":
-			err := state.Db.ResetWords(context.Background())
-			if err != nil {
-				log.Fatalf("couldn't reset the db: %s", err)
-			}
-			fmt.Println("db was succesfully reset!")
-
-		case "q", "quit":
-			fmt.Println("Hope u learned a lot, see you later!")
-			fmt.Println("Goodbye!")
-			return
-
-		case "switch":
-			language, err := state.SelectLang()
-			if err != nil {
-				log.Fatalf("%s", err)
-			}
-			state.CurrentLanguage = language
-
-		case "help":
-			repl.Help()
-
-		case "deephelp":
-			repl.DeepHelp()
-
-		default:
-			fmt.Println("I dont understand the command")
-
+		return language
+	} else {
+		language, err := state.Db.GetLanguageByCode(context.Background(), userConfig.LastLanguage)
+		if err != nil {
+			log.Fatalf("%s", err)
 		}
+		return language
 	}
 }

@@ -52,5 +52,13 @@ func (state *AppState) SelectLang() (database.Language, error) {
 
 	fmt.Printf("Language was succesfully switched to %s\n", language.Name)
 
+	//saving the language into config
+	userconfig := Config{}
+	userconfig.LastLanguage = language.Code
+	err = state.SaveConfig(userconfig)
+	if err != nil {
+		return database.Language{}, err
+	}
+
 	return language, nil
 }
