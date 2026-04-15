@@ -12,10 +12,15 @@ import (
 const updateWordSeen = `-- name: UpdateWordSeen :exec
 UPDATE words
 SET last_seen_at = now(), frequency = frequency + 1
-WHERE token_name = $1
+WHERE token_name = $1 AND language_id = $2
 `
 
-func (q *Queries) UpdateWordSeen(ctx context.Context, tokenName string) error {
-	_, err := q.db.ExecContext(ctx, updateWordSeen, tokenName)
+type UpdateWordSeenParams struct {
+	TokenName  string
+	LanguageID int32
+}
+
+func (q *Queries) UpdateWordSeen(ctx context.Context, arg UpdateWordSeenParams) error {
+	_, err := q.db.ExecContext(ctx, updateWordSeen, arg.TokenName, arg.LanguageID)
 	return err
 }

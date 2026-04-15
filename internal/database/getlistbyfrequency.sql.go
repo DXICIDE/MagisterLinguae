@@ -10,11 +10,11 @@ import (
 )
 
 const getListByFrequency = `-- name: GetListByFrequency :many
-SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words WHERE frequency > 1 ORDER BY known ASC, frequency DESC
+SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words WHERE frequency > 1 AND language_id = $1 ORDER BY known ASC, frequency DESC
 `
 
-func (q *Queries) GetListByFrequency(ctx context.Context) ([]Word, error) {
-	rows, err := q.db.QueryContext(ctx, getListByFrequency)
+func (q *Queries) GetListByFrequency(ctx context.Context, languageID int32) ([]Word, error) {
+	rows, err := q.db.QueryContext(ctx, getListByFrequency, languageID)
 	if err != nil {
 		return nil, err
 	}

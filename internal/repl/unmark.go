@@ -5,13 +5,17 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+
+	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
 func (state *AppState) UnMark(words []string) error {
 	for _, v := range words {
 		word := strings.ToLower(v)
 
-		wordDB, err := state.Db.GetWord(context.Background(), word)
+		getWordParams := database.GetWordParams{TokenName: word, LanguageID: state.CurrentLanguage.ID}
+
+		wordDB, err := state.Db.GetWord(context.Background(), getWordParams)
 		if err == sql.ErrNoRows {
 			fmt.Println("The word is already unknown")
 			return nil
@@ -19,7 +23,9 @@ func (state *AppState) UnMark(words []string) error {
 			return err
 		}
 
-		err = state.Db.UpdateWordUnKnown(context.Background(), wordDB.TokenName)
+		wordWordUnknown := database.UpdateWordUnKnownParams{TokenName: wordDB.TokenName, LanguageID: state.CurrentLanguage.ID}
+
+		err = state.Db.UpdateWordUnKnown(context.Background(), wordWordUnknown)
 		if err != nil {
 			return nil
 		}

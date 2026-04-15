@@ -10,23 +10,25 @@ import (
 )
 
 const createWord = `-- name: CreateWord :one
-INSERT INTO words (token_name, last_seen_at, known, frequency)
+INSERT INTO words (token_name, last_seen_at, known, frequency, language_id)
 VALUES (
     $1,
     now(),
     $2,
-    1
+    1,
+    $3
 )
 RETURNING token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id
 `
 
 type CreateWordParams struct {
-	TokenName string
-	Known     bool
+	TokenName  string
+	Known      bool
+	LanguageID int32
 }
 
 func (q *Queries) CreateWord(ctx context.Context, arg CreateWordParams) (Word, error) {
-	row := q.db.QueryRowContext(ctx, createWord, arg.TokenName, arg.Known)
+	row := q.db.QueryRowContext(ctx, createWord, arg.TokenName, arg.Known, arg.LanguageID)
 	var i Word
 	err := row.Scan(
 		&i.TokenName,

@@ -10,11 +10,16 @@ import (
 )
 
 const getWord = `-- name: GetWord :one
-SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words WHERE token_name = $1
+SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words WHERE token_name = $1 AND language_id = $2
 `
 
-func (q *Queries) GetWord(ctx context.Context, tokenName string) (Word, error) {
-	row := q.db.QueryRowContext(ctx, getWord, tokenName)
+type GetWordParams struct {
+	TokenName  string
+	LanguageID int32
+}
+
+func (q *Queries) GetWord(ctx context.Context, arg GetWordParams) (Word, error) {
+	row := q.db.QueryRowContext(ctx, getWord, arg.TokenName, arg.LanguageID)
 	var i Word
 	err := row.Scan(
 		&i.TokenName,

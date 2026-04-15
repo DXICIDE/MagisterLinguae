@@ -6,12 +6,15 @@ import (
 	"fmt"
 	"strings"
 	"time"
+
+	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
 func (state *AppState) LookUpWord(word string) (string, error) {
 	word = strings.ToLower(word)
 
-	wordDB, err := state.Db.GetWord(context.Background(), word)
+	getWordParams := database.GetWordParams{TokenName: word, LanguageID: state.CurrentLanguage.ID}
+	wordDB, err := state.Db.GetWord(context.Background(), getWordParams)
 	if err == sql.ErrNoRows {
 		return fmt.Sprintf("Word %s not found\n", word), nil
 	} else if err != nil {

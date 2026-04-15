@@ -1,2 +1,3 @@
 -- name: GetWords :many
-SELECT * FROM words;
+SELECT * FROM words
+WHERE language_id = $1;

@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/DXICIDE/MagisterLinguae/internal/database"
 	"github.com/google/go-cmp/cmp"
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
@@ -39,7 +40,8 @@ func (state *AppState) TestMark(t *testing.T) {
 			}
 
 			for _, v := range words {
-				word, err := dbQueries.GetWord(context.Background(), v)
+				getWordParams := database.GetWordParams{TokenName: v, LanguageID: state.CurrentLanguage.ID}
+				word, err := dbQueries.GetWord(context.Background(), getWordParams)
 				if err != nil {
 					t.Fatalf("couldnt get word: %s err: %s", v, err)
 				}

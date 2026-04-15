@@ -12,10 +12,15 @@ import (
 const updateWordUnKnown = `-- name: UpdateWordUnKnown :exec
 UPDATE words
 SET known = false
-WHERE token_name = $1
+WHERE token_name = $1 AND language_id = $2
 `
 
-func (q *Queries) UpdateWordUnKnown(ctx context.Context, tokenName string) error {
-	_, err := q.db.ExecContext(ctx, updateWordUnKnown, tokenName)
+type UpdateWordUnKnownParams struct {
+	TokenName  string
+	LanguageID int32
+}
+
+func (q *Queries) UpdateWordUnKnown(ctx context.Context, arg UpdateWordUnKnownParams) error {
+	_, err := q.db.ExecContext(ctx, updateWordUnKnown, arg.TokenName, arg.LanguageID)
 	return err
 }

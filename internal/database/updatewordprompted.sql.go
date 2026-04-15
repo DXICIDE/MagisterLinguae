@@ -12,10 +12,15 @@ import (
 const updateWordPrompted = `-- name: UpdateWordPrompted :exec
 UPDATE words
 SET promted_user_to_mark = true
-WHERE token_name = $1
+WHERE token_name = $1 AND language_id = $2
 `
 
-func (q *Queries) UpdateWordPrompted(ctx context.Context, tokenName string) error {
-	_, err := q.db.ExecContext(ctx, updateWordPrompted, tokenName)
+type UpdateWordPromptedParams struct {
+	TokenName  string
+	LanguageID int32
+}
+
+func (q *Queries) UpdateWordPrompted(ctx context.Context, arg UpdateWordPromptedParams) error {
+	_, err := q.db.ExecContext(ctx, updateWordPrompted, arg.TokenName, arg.LanguageID)
 	return err
 }

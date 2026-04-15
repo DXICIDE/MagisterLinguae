@@ -11,10 +11,11 @@ import (
 
 const getWords = `-- name: GetWords :many
 SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words
+WHERE language_id = $1
 `
 
-func (q *Queries) GetWords(ctx context.Context) ([]Word, error) {
-	rows, err := q.db.QueryContext(ctx, getWords)
+func (q *Queries) GetWords(ctx context.Context, languageID int32) ([]Word, error) {
+	rows, err := q.db.QueryContext(ctx, getWords, languageID)
 	if err != nil {
 		return nil, err
 	}

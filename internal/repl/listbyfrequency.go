@@ -6,7 +6,7 @@ import (
 )
 
 func (state *AppState) ListByFrequency() error {
-	words, err := state.Db.GetListByFrequency(context.Background())
+	words, err := state.Db.GetListByFrequency(context.Background(), state.CurrentLanguage.ID)
 	if err != nil {
 		return err
 	}

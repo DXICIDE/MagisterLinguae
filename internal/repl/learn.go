@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+
+	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
 func (state *AppState) Learn(words []string) (string, error) {
@@ -21,12 +23,13 @@ func (state *AppState) Learn(words []string) (string, error) {
 			continue
 		}
 
-		wordDB, err := state.Db.GetWord(context.Background(), word)
+		getWordParams := database.GetWordParams{TokenName: word, LanguageID: state.CurrentLanguage.ID}
+		wordDB, err := state.Db.GetWord(context.Background(), getWordParams)
 
 		//if the word is not in db
 		if err == sql.ErrNoRows {
 			fmt.Printf("Word %s not found\n", wordName)
-			err = createWordDB(word, state.Db, false)
+			err = state.createWordDB(word, false)
 			if err != nil {
 				return "", err
 			}
@@ -43,7 +46,8 @@ func (state *AppState) Learn(words []string) (string, error) {
 			fmt.Printf("Word '%s' already exists\n", wordName)
 
 			//update the last time we saw the word and frequency +1
-			state.Db.UpdateWordSeen(context.Background(), wordName)
+			updateWordSeenParams := database.UpdateWordSeenParams{TokenName: wordName, LanguageID: state.CurrentLanguage.ID}
+			state.Db.UpdateWordSeen(context.Background(), updateWordSeenParams)
 
 			//add brackets
 			if wordDB.Known == false {

@@ -12,13 +12,13 @@ func Replfunc(state *AppState) {
 		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
 			Help()
-			return
+			continue
 		}
 		switch words[0] {
 		case "learn":
 			sentence, err := state.Learn(words[1:])
 			if err != nil {
-				log.Fatal("couldn't process the words")
+				log.Fatalf("couldn't process the words: %s", err)
 			}
 
 			println(sentence)

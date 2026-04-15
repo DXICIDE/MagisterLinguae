@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/DXICIDE/MagisterLinguae/internal/database"
 	"github.com/google/go-cmp/cmp"
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
@@ -44,7 +45,7 @@ func (state *AppState) TestLearn(t *testing.T) {
 
 			//add known words, if there are any
 			for _, w := range tc.knownWords {
-				err := createWordDB(w, dbQueries, true)
+				err := state.createWordDB(w, true)
 				if err != nil {
 					t.Fatalf("setup failed")
 				}
@@ -63,7 +64,8 @@ func (state *AppState) TestLearn(t *testing.T) {
 
 			//diff in the db
 			for _, expectedWord := range tc.wantInDB {
-				saved, err := dbQueries.GetWord(context.Background(), expectedWord)
+				getWordParams := database.GetWordParams{TokenName: expectedWord, LanguageID: state.CurrentLanguage.ID}
+				saved, err := dbQueries.GetWord(context.Background(), getWordParams)
 				if err != nil {
 					t.Fatalf("Word %s not found in DB: %s", expectedWord, err)
 				}
