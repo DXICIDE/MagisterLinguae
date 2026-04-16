@@ -1,4 +1,4 @@
-# MagisterLinguae 0.3
+# MagisterLinguae 0.4
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
@@ -18,7 +18,8 @@ The project is written in Go, as it's my most used language, the first iteration
 This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
 not stay the same in the release of 1.0
 
-Current version is 0.3, added support for files, tests are not finished and I have not yet tried to test db, it's probably not necessary right now. I now decided against refactoring the project. I think it's better to finish this even though it's sloppy otherwise I would refactor it again and again till I grew old. I will now finish all the remaining things in future features and get to UI.
+Current version is 0.4, Finally added support for multiple languages most of which I will add later, they need to be properly tested. Now the goal in 0.4.1 will be to add tests and support
+for custom languages/unsupported languages or to distinguish between 2 ppl learning the same language
 
 ## Current features: 
 - The program can recognise words (case insensitive) which are then stored in db
@@ -29,9 +30,9 @@ Current version is 0.3, added support for files, tests are not finished and I ha
 *known words should be marked when user completely understands them 
 
 These all will be updated depending on what is completed and what new comes up
-### Future features:
+### Future features (dopamine corner):
 (based on priority and its complexity, most important and least complex are on top)
-- refactorization of the code, make it simpler, cleaner and more readable ✅ -- needs part 2, the code is starting to be confusing again. I'll need to focus on breaking down the long functions
+- refactorization of the code, make it simpler, cleaner and more readable ✅
 - lookup, u can search word words in db, if they are there or not and the last time u seen them + frequency ✅
 - probably REPL, makes the use of program very easier, at least for marking ✅
 - prompting the user to mark words as known after reaching certain frequency of the word ✅
@@ -41,11 +42,12 @@ These all will be updated depending on what is completed and what new comes up
 - add support for files ✅
 - help command ✅
 - subtitles and youtube transcript compatibility 
-- supporting other languages
+- supporting other languages ✅
 - ability to create multiple own instances of languages/tabs
 - dictionary api
 - quiz based on words u know and have not seen for a long time, kinda like anki or something like that
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books)
+- docker support
 
 (The holy grail)
 - web UI
