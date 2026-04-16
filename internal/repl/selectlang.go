@@ -2,23 +2,17 @@ package repl
 
 import (
 	"context"
+	"errors"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
-	"github.com/joho/godotenv"
 )
 
 // stdin scan
 func (state *AppState) SelectLang() (database.Language, error) {
 	fmt.Println("Select language to learn please:")
-
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("Warning: No .env file found, using system environment variables")
-	}
 
 	//gets all languages for display
 	languages, err := state.Db.GetLanguageList(context.Background())
@@ -33,7 +27,7 @@ func (state *AppState) SelectLang() (database.Language, error) {
 	//scan the user input
 	scanned := state.Scan(os.Stdin)
 	if len(scanned) != 1 {
-		fmt.Println("Too many or too few words!")
+		return database.Language{}, errors.New("Too many or too few words!")
 	}
 	var language database.Language
 
