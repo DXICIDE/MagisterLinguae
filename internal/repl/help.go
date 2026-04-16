@@ -14,6 +14,9 @@ func Help() {
 	fmt.Println("list			Show list of the word by frequency and known status")
 	fmt.Println("resetdb 		Reset the database!!!")
 	fmt.Println("help 			print help")
+	fmt.Println("newlang 		prompts you to create new language tab with custom code and name")
+	fmt.Println("lang 			prints the current used language tab")
+	fmt.Println("deletelang 		delete language by typing code")
 	fmt.Println("q / quit 		quit the repl")
 	fmt.Println("deephelp 		List all the command and their usage and purpose")
 }
@@ -29,6 +32,9 @@ func DeepHelp() {
 	fmt.Println("list			Show list of the word by frequency and known status, very important for searching for frequent words that are you don't know, should make learning the language much easier")
 	fmt.Println("resetdb 		Reset the database!!! This is a complete wipe of db, no warning, you will lose everything, this will be changed later")
 	fmt.Println("help 			Print help")
+	fmt.Println("newlang 		prompts you to create new language tab with custom code and name")
+	fmt.Println("lang 			prints the current used language tab")
+	fmt.Println("deletelang 		delete language by typing code")
 	fmt.Println("q / quit 		Quit the repl")
 	fmt.Println("deephelp 		List all the command and their usage and purpose")
 }

@@ -75,16 +75,43 @@ func Replfunc(state *AppState) {
 			}
 
 		case "resetdb":
+			//function made for testing/theoretically stays for user to use in case of wiping everything
 			err := state.Db.ResetWords(context.Background())
 			if err != nil {
-				log.Fatalf("couldn't reset the db: %s", err)
+				log.Fatalf("couldn't reset words: %s", err)
 			}
-			fmt.Println("db was succesfully reset!")
+
+			err = state.Db.ResetLanguages(context.Background())
+			if err != nil {
+				log.Fatalf("couldn't reset languages: %s", err)
+			}
+
+			err = state.Db.SeedLanguages(context.Background())
+			if err != nil {
+				log.Fatalf("couldn't seed languages: %s", err)
+			}
+
+			fmt.Println("db was successfully reset and reseeded!")
 
 		case "q", "quit":
 			fmt.Println("Hope u learned a lot, see you later!")
 			fmt.Println("Goodbye!")
 			return
+
+		case "newlang":
+			err := state.CustomLanguage()
+			if err != nil {
+				log.Fatalf("%s", err)
+			}
+
+		case "lang":
+			fmt.Printf("Current language name: %s - %s\n", state.CurrentLanguage.Code, state.CurrentLanguage.Name)
+
+		case "deletelang":
+			err := state.DeletetLang()
+			if err != nil {
+				log.Fatalf("%s", err)
+			}
 
 		case "switch":
 			language, err := state.SelectLang()

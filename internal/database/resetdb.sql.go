@@ -9,8 +9,17 @@ import (
 	"context"
 )
 
+const resetLanguages = `-- name: ResetLanguages :exec
+TRUNCATE languages RESTART IDENTITY CASCADE
+`
+
+func (q *Queries) ResetLanguages(ctx context.Context) error {
+	_, err := q.db.ExecContext(ctx, resetLanguages)
+	return err
+}
+
 const resetWords = `-- name: ResetWords :exec
-DELETE FROM words
+TRUNCATE words RESTART IDENTITY CASCADE
 `
 
 func (q *Queries) ResetWords(ctx context.Context) error {
