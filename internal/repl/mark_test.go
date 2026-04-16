@@ -10,19 +10,22 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-func (state *AppState) TestMark(t *testing.T) {
+func TestMark(t *testing.T) {
 	tests := map[string]struct {
-		input      string
-		wordToMark []string
+		input        string
+		wordToMark   []string
+		languageCode string
 	}{
 		"simple": {
-			input:      "una",
-			wordToMark: []string{"una"},
+			input:        "una",
+			wordToMark:   []string{"una"},
+			languageCode: "it",
 		},
 
 		"multiple": {
-			input:      "ciao io sono rostislav",
-			wordToMark: []string{"Ciao", "io", "sono", "Rostislav"},
+			input:        "ciao io sono rostislav",
+			wordToMark:   []string{"Ciao", "io", "sono", "Rostislav"},
+			languageCode: "it",
 		},
 	}
 
@@ -31,10 +34,19 @@ func (state *AppState) TestMark(t *testing.T) {
 			//setup the db and scan the input
 			dbQueries := setupTestDB(t)
 			reader := strings.NewReader(tc.input)
+			state := &AppState{}
+			state.Db = dbQueries
+
+			var err error
+			state.CurrentLanguage, err = state.Db.GetLanguageByCode(context.Background(), tc.languageCode)
+			if err != nil {
+				t.Fatalf("Getting the language failed: %s", err)
+			}
+
 			words := state.Scan(reader)
 
 			//add known words, if there are any
-			err := state.Mark(tc.wordToMark)
+			err = state.Mark(tc.wordToMark)
 			if err != nil {
 				t.Fatalf("setup failed")
 			}

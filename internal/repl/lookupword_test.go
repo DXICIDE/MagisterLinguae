@@ -9,17 +9,28 @@ import (
 	_ "github.com/lib/pq" // registers the "postgres" driver
 )
 
-func (state *AppState) TestLookUpWord(t *testing.T) {
+func TestLookUpWord(t *testing.T) {
 	dbQueries := setupTestDB(t)
+
+	state := &AppState{}
+	state.Db = dbQueries
+
+	var err error
+	state.CurrentLanguage, err = state.Db.GetLanguageByCode(context.Background(), "it")
+	if err != nil {
+		t.Fatalf("Getting the language failed: %s", err)
+	}
 
 	// Insert test word
 	dbQueries.CreateWord(context.Background(), database.CreateWordParams{
-		TokenName: "hello",
-		Known:     true,
+		TokenName:  "hello",
+		Known:      true,
+		LanguageID: state.CurrentLanguage.ID,
 	})
 	dbQueries.CreateWord(context.Background(), database.CreateWordParams{
-		TokenName: "polo",
-		Known:     false,
+		TokenName:  "polo",
+		Known:      false,
+		LanguageID: state.CurrentLanguage.ID,
 	})
 
 	words := make([]string, 2)
