@@ -1,4 +1,4 @@
-# MagisterLinguae 0.4
+# MagisterLinguae 0.4.1
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
@@ -18,8 +18,8 @@ The project is written in Go, as it's my most used language, the first iteration
 This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
 not stay the same in the release of 1.0
 
-Current version is 0.4, Finally added support for multiple languages most of which I will add later, they need to be properly tested. Now the goal in 0.4.1 will be to add tests and support
-for custom languages/unsupported languages or to distinguish between 2 ppl learning the same language
+Current version is 0.4.1, I tried to add more tests, but fell short. I would have to simulate user input in a lot of functions which would mean a lot of rewriting, I'm just gonna finish
+the app, then test everything
 
 ## Current features: 
 - The program can recognise words (case insensitive) which are then stored in db
@@ -43,7 +43,7 @@ These all will be updated depending on what is completed and what new comes up
 - help command ✅
 - subtitles and youtube transcript compatibility 
 - supporting other languages ✅
-- ability to create multiple own instances of languages/tabs
+- ability to create multiple own instances of languages/tabs ✅
 - dictionary api
 - quiz based on words u know and have not seen for a long time, kinda like anki or something like that
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books)
