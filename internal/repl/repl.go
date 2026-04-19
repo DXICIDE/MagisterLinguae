@@ -120,6 +120,12 @@ func Replfunc(state *AppState) {
 			}
 			state.CurrentLanguage = language
 
+		case "anki":
+			err := state.AnkiTest()
+			if err != nil {
+				log.Fatalf("Anki test couldn't proceed: %s", err)
+			}
+
 		case "help":
 			Help()
 

@@ -45,7 +45,7 @@ These all will be updated depending on what is completed and what new comes up
 - supporting other languages ✅
 - ability to create multiple own instances of languages/tabs ✅
 - dictionary api
-- quiz based on words u know and have not seen for a long time, kinda like anki or something like that
+- quiz based on words u know and have not seen for a long time, kinda like anki or something like that ✅
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books)
 - docker support
 

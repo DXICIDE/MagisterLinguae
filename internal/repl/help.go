@@ -17,6 +17,7 @@ func Help() {
 	fmt.Println("newlang 		prompts you to create new language tab with custom code and name")
 	fmt.Println("lang 			prints the current used language tab")
 	fmt.Println("deletelang 		delete language by typing code")
+	fmt.Println("anki 			Gives u a quiz, similar to anki. Only on words u marked as known, with no translate")
 	fmt.Println("q / quit 		quit the repl")
 	fmt.Println("deephelp 		List all the command and their usage and purpose")
 }
@@ -35,6 +36,7 @@ func DeepHelp() {
 	fmt.Println("newlang 		prompts you to create new language tab with custom code and name")
 	fmt.Println("lang 			prints the current used language tab")
 	fmt.Println("deletelang 		delete language by typing code")
+	fmt.Println("anki 			Gives u a quiz, similar to anki. Only on words u marked as known, with no translate. The purpose is to prompt you to answer if u know the words in isolation as if it was just taken out of sentence")
 	fmt.Println("q / quit 		Quit the repl")
 	fmt.Println("deephelp 		List all the command and their usage and purpose")
 }
