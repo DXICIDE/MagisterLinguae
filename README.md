@@ -44,15 +44,19 @@ These all will be updated depending on what is completed and what new comes up
 - subtitles and youtube transcript compatibility 
 - supporting other languages ✅
 - ability to create multiple own instances of languages/tabs ✅
-- dictionary api
+- dictionary api 
 - quiz based on words u know and have not seen for a long time, kinda like anki or something like that ✅
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books)
 - docker support
 
+everything above will be in the 1.0 version
 (The holy grail)
-- web UI
+- web UI - version 2.0
 
 #### Optional:
 - AI support
 - account support
+- support for languages with different writing
+- additional resources for input learning
+- text to speech
 - subscription or paygate system (just for learning, I intend for this project to stay open source)
