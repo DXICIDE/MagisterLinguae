@@ -13,9 +13,9 @@ The more u use it, the more useful the app will be. The goal is to get you to th
 Then you can start learning grammar and practice your output, but not here, there is no grammar or no place for your output. There will be an option for dictionary translation,
 but only for single words or short phrases, you're not really supposed to translate whole sentences. 
 
-The project is written in Go, as it's my most used language, the first iteration will be a CLI, REPL and UI will be coming later.
+The project is written in Go, as it's my most used language, It's currently REPL, web UI will be coming later.
 
-This is the officially first alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
+This is the alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
 not stay the same in the release of 1.0
 
 Current version is 0.4.1, I tried to add more tests, but fell short. I would have to simulate user input in a lot of functions which would mean a lot of rewriting, I'm just gonna finish
