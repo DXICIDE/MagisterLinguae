@@ -5,13 +5,16 @@ import (
 	"os"
 )
 
-func (state *AppState) LearnFromFile(filepath []string) (string, error) {
+func (state *AppState) LearnFromFileRepl(filepath []string) (string, error) {
 	var path string
 	for _, v := range filepath {
 		path += v
 	}
-	println(path)
 
+	return state.LearnFromFilePath(path)
+}
+
+func (state *AppState) LearnFromFilePath(path string) (string, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return "", err

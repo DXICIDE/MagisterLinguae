@@ -29,7 +29,7 @@ func Replfunc(state *AppState) {
 			}
 
 		case "learnfile":
-			sentence, err := state.LearnFromFile(words[1:])
+			sentence, err := state.LearnFromFileRepl(words[1:])
 			if err != nil {
 				log.Fatalf("couldn't process the file: %s", err)
 			}
@@ -125,6 +125,9 @@ func Replfunc(state *AppState) {
 			if err != nil {
 				log.Fatalf("Anki test couldn't proceed: %s", err)
 			}
+
+		case "books":
+			state.Books()
 
 		case "help":
 			Help()
