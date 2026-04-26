@@ -1,2 +1,2 @@
 -- name: MarkWordsByFrequency :many
-SELECT * FROM words WHERE frequency = 7 AND known = false AND promted_user_to_mark = false AND language_id = $1;
+SELECT * FROM words WHERE frequency > 7 AND known = false AND promted_user_to_mark = false AND language_id = $1;

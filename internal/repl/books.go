@@ -68,13 +68,19 @@ func (state *AppState) readPage(bookname string, chapterNmb string) {
 		if words[0] == "q" {
 			return
 		}
-		pathFile := path + fmt.Sprintf("page%s/page.txt", words[0])
+		pageDir := path + fmt.Sprintf("page%s/", words[0])
+		pathFile := pageDir + "page.txt"
 
 		sentence, err := state.LearnFromFilePath(pathFile)
 		if err != nil {
 			log.Fatalf("couldn't process the file: %s", err)
 		}
 		println(sentence)
+		err = state.Markfrequency()
+
+		if err != nil {
+			log.Fatal("couldn't prompt the user to mark the word")
+		}
 	}
 
 }

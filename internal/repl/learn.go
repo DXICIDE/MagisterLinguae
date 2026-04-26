@@ -43,10 +43,10 @@ func (state *AppState) Learn(words []string) (string, error) {
 
 			//if the word is in db
 		} else {
-			fmt.Printf("Word '%s' already exists\n", wordName)
+			fmt.Printf("Word '%s' already exists\n", word)
 
 			//update the last time we saw the word and frequency +1
-			updateWordSeenParams := database.UpdateWordSeenParams{TokenName: wordName, LanguageID: state.CurrentLanguage.ID}
+			updateWordSeenParams := database.UpdateWordSeenParams{TokenName: word, LanguageID: state.CurrentLanguage.ID}
 			state.Db.UpdateWordSeen(context.Background(), updateWordSeenParams)
 
 			//add brackets

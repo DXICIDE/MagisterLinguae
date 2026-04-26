@@ -12,7 +12,7 @@ import (
 //user will be prompted to mark the word after the 8th time of seeing the word, then at 12th time and then never.
 
 func (state *AppState) Markfrequency() error {
-	//Get words that were mentioned exactly 7 times and are unknown
+	//Get words that were mentioned more than 7 times and are unknown and user was not yet prompted
 	words, err := state.Db.MarkWordsByFrequency(context.Background(), state.CurrentLanguage.ID)
 	if err != nil {
 		return err
