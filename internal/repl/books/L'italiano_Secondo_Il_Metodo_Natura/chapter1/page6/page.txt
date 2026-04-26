@@ -1,0 +1,14 @@
+Bruno. Bruno e Pietro sono fratelli. Maria è la sorella
+di Pia. Pia è la sorella di Maria. Maria e Pia sono
+sorelle. Maria e Pia sono le sorelle di Bruno e Pietro.
+Bruno e Pietro sono i fratelli di Maria e Pia.
+Quanti fratelli ha Maria? Ha due fratelli. Quanti fratelli
+ha Bruno, uno o due? Bruno ha un fratello. Chi è
+il fratello di Bruno? Il fratello di Bruno è Pietro.
+Quante sorelle ha Pia, una o due? Pia ha una sorella
+Chi è la sorella di Pia? La sorella di Pia è
+Maria. Quante sorelle ha Pietro, due o tre? Ha due
+sorelle. Pietro e Maria sono fratello e sorella. Quanti
+fratelli hanno Maria e Pia? Hanno due fratelli. Chi
+sono i due fratelli di Maria e Pia? Sono Bruno e
+Pietro. Bruno è fratello di Maria e Pia.

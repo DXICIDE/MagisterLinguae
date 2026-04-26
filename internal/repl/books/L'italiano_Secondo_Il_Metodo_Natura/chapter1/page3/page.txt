@@ -1,0 +1,9 @@
+il padre. Teresa Rossi è la madre. Bruno è il primo
+figlio, Pietro è il secondo figlio. I due figli sono
+Bruno e Pietro. Maria è la prima figlia, Pia è la
+seconda figlia. Le due figlie sono Maria e Pia.
+
+Bruno Rossi è figlio di Carlo Rossi. Anche Pietro
+Rossi è figlio di Carlo Rossi. I due bambini, Bruno
+e Pietro, sono figli di Carlo Rossi. Il primo figlio di
+Carlo Rossi è Bruno, il secondo figlio è Pietro. Bruno
