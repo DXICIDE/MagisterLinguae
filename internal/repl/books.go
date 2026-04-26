@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 )
 
 func (state *AppState) Books() {
@@ -70,6 +71,13 @@ func (state *AppState) readPage(bookname string, chapterNmb string) {
 		}
 		pageDir := path + fmt.Sprintf("page%s/", words[0])
 		pathFile := pageDir + "page.txt"
+
+		imagePath := pageDir + "image.png"
+		cmd := exec.Command("wslview", imagePath)
+		if err := cmd.Start(); err == nil {
+			fmt.Printf("imagePath %s\n", imagePath)
+		}
+		fmt.Printf("%s", err)
 
 		sentence, err := state.LearnFromFilePath(pathFile)
 		if err != nil {
