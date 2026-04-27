@@ -18,7 +18,7 @@ func (state *AppState) Learn(words []string) (string, error) {
 		//if the word is any of these, we dont do anything
 		word := wordName
 		word = strings.ToLower(word)
-		if word == "," || word == "." || word == "?" || word == "!" || word == "-" || word == ";" || word == ":" {
+		if word == "," || word == "." || word == "?" || word == "!" || word == "-" || word == ";" || word == ":" || word == "«" || word == "»" || word == "(" || word == ")" {
 			proccesedWords = append(proccesedWords, wordName)
 			continue
 		}
