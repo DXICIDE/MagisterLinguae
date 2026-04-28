@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strconv"
 )
 
 func (state *AppState) Books() {
@@ -37,7 +38,7 @@ func (state *AppState) chapter(bookname string) {
 		return
 	}
 	for {
-		fmt.Printf("This book has %d chapters!\n", chapterCount)
+		fmt.Printf("\nThis book has %d chapters!\n", chapterCount)
 		fmt.Println("Please choose a chapter number:")
 		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
@@ -47,20 +48,31 @@ func (state *AppState) chapter(bookname string) {
 		if words[0] == "q" {
 			return
 		}
+
+		id, err := strconv.Atoi(words[0])
+		if err != nil {
+			fmt.Printf("This is not a number nor valid command!: %s", err)
+			continue
+		}
+		if id > chapterCount || id < 1 {
+			fmt.Println("This page does not exist!")
+			continue
+		}
+
 		state.readPage(bookname, words[0])
 	}
 }
 
 func (state *AppState) readPage(bookname string, chapterNmb string) {
 	path := fmt.Sprintf("internal/repl/books/%s/chapter%s/", bookname, chapterNmb)
-	chapterCount, err := countSubdirs(path)
+	pageCount, err := countSubdirs(path)
 	if err != nil {
 		fmt.Println("Couldn't count the subcategories")
 		return
 	}
 	for {
-		fmt.Printf("This chapter has %d pages!\n", chapterCount)
-		fmt.Println("Please choose a page number:")
+		fmt.Printf("\nThis chapter has %d pages!\n", pageCount)
+		fmt.Println("Please choose a page number or use dictionary!:")
 		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
 			fmt.Println("Too many or too few words!")
@@ -69,6 +81,26 @@ func (state *AppState) readPage(bookname string, chapterNmb string) {
 		if words[0] == "q" {
 			return
 		}
+
+		if words[0] == "dict" || words[0] == "dictionary" {
+			err = state.Dictionary(words[1])
+			if err != nil {
+				log.Fatalf("dictionary failed: %s", err)
+			}
+			continue
+		}
+
+		id, err := strconv.Atoi(words[0])
+		if err != nil {
+			fmt.Printf("This is not a number nor valid command!: %s", err)
+			continue
+		}
+
+		if id > pageCount || id < 1 {
+			fmt.Println("This page does not exist!")
+			continue
+		}
+
 		pageDir := path + fmt.Sprintf("page%s/", words[0])
 		pathFile := pageDir + "page.txt"
 

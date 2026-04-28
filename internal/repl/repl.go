@@ -126,6 +126,12 @@ func Replfunc(state *AppState) {
 				log.Fatalf("Anki test couldn't proceed: %s", err)
 			}
 
+		case "dict", "dictionary":
+			err := state.Dictionary(words[1])
+			if err != nil {
+				log.Fatalf("dictionary failed: %s", err)
+			}
+
 		case "books":
 			state.Books()
 
