@@ -1,4 +1,5 @@
 -- +goose Up
+TRUNCATE TABLE words CASCADE;
 ALTER TABLE words
 ADD language_id INT NOT NULL REFERENCES languages(id);
 

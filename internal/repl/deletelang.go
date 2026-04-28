@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 // stdin scan
@@ -19,14 +20,15 @@ func (state *AppState) DeletetLang() error {
 	for _, lang := range languages {
 		fmt.Printf("%d - %s - %s\n", lang.ID, lang.Code, lang.Name)
 	}
-	fmt.Println("Type the code of language to delete please:")
+	fmt.Println("Type the id of language to delete please:")
 
-	code := state.Scan(os.Stdin)
-	if len(code) != 1 {
+	scanned := state.Scan(os.Stdin)
+	if len(scanned) != 1 {
 		return errors.New("Too many or too few words!")
 	}
+	id, err := strconv.Atoi(scanned[0])
 
-	err = state.Db.DeleteLanguage(context.Background(), code[0])
+	err = state.Db.DeleteLanguage(context.Background(), int32(id))
 	if err != nil {
 		return fmt.Errorf("couldnt delete language: %s", err)
 	}

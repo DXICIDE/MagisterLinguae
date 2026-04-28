@@ -1,2 +1,2 @@
 -- name: DeleteLanguage :exec
-DELETE FROM languages WHERE code = $1;
+DELETE FROM languages WHERE id = $1;
