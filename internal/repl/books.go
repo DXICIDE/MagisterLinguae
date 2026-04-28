@@ -13,7 +13,7 @@ func (state *AppState) Books() {
 		fmt.Println("1. L'italiano Secondo Il Metodo Natura")
 		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
-			fmt.Println("Too many or too few words! type q to exit")
+			fmt.Println("No input!")
 			continue
 		}
 		switch words[0] {
@@ -38,10 +38,10 @@ func (state *AppState) chapter(bookname string) {
 	}
 	for {
 		fmt.Printf("This book has %d chapters!\n", chapterCount)
-		fmt.Println("Please choose a chapter number!:")
+		fmt.Println("Please choose a chapter number:")
 		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
-			fmt.Println("Too many or too few words!")
+			fmt.Println("No input!")
 			return
 		}
 		if words[0] == "q" {
@@ -60,7 +60,7 @@ func (state *AppState) readPage(bookname string, chapterNmb string) {
 	}
 	for {
 		fmt.Printf("This chapter has %d pages!\n", chapterCount)
-		fmt.Println("Please choose a page number!:")
+		fmt.Println("Please choose a page number:")
 		words := state.Scan(os.Stdin)
 		if len(words) == 0 {
 			fmt.Println("Too many or too few words!")

@@ -1,6 +1,6 @@
 Roma è una città. Anche Milano e Parigi sono
 città. Parigi è una città di Francia. Milano e Roma
-sono città d’Italia. La Francia è un paese. Anche
-l’Italia è un paese. La Francia e l’Italia sono due
-paesi d’Europa. Anche la Germania e l’Inghilterra
-sono paesi d’Europa.
+sono città d'Italia. La Francia è un paese. Anche
+l'Italia è un paese. La Francia e l'Italia sono due
+paesi d'Europa. Anche la Germania e l'Inghilterra
+sono paesi d'Europa.
