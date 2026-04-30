@@ -15,11 +15,11 @@ func TestConfig(t *testing.T) {
 	state.Db = dbQueries
 
 	var err error
-	state.CurrentLanguage, err = state.Db.GetLanguageByCode(context.Background(), "it")
+	state.CurrentLanguage, err = state.Db.GetLanguageById(context.Background(), 1)
 	if err != nil {
 		t.Fatalf("Getting the language failed: %s", err)
 	}
-	config := Config{LastLanguage: "it"}
+	config := Config{LastLanguage: 1}
 	state.SaveConfig(config)
 	defer os.Remove("conf.json")
 
@@ -31,7 +31,7 @@ func TestConfig(t *testing.T) {
 
 	// Check output
 	expected := "it"
-	if config.LastLanguage != "it" {
+	if config.LastLanguage != 1 {
 		t.Fatalf("expected %q in output, got %q", expected, config.LastLanguage)
 	}
 

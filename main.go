@@ -14,7 +14,7 @@ import (
 )
 
 type UserConfig struct {
-	LastLanguage string `json:"last_language"`
+	LastLanguage int32 `json:"last_language"`
 }
 
 func main() {
@@ -54,14 +54,14 @@ func main() {
 }
 
 func LastLanguage(userConfig repl.Config, state *repl.AppState) database.Language {
-	if userConfig.LastLanguage == "" {
+	if userConfig.LastLanguage == 0 {
 		language, err := state.SelectLang()
 		if err != nil {
 			log.Fatalf("%s", err)
 		}
 		return language
 	} else {
-		language, err := state.Db.GetLanguageByCode(context.Background(), userConfig.LastLanguage)
+		language, err := state.Db.GetLanguageById(context.Background(), userConfig.LastLanguage)
 		if err != nil {
 			log.Fatalf("%s", err)
 		}

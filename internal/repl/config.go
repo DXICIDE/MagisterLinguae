@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	LastLanguage string `json:"last_language"`
+	LastLanguage int32 `json:"last_language"`
 }
 
 func (state *AppState) GetConfig() (Config, error) {

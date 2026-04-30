@@ -22,7 +22,7 @@ func (state *AppState) SelectLang() (database.Language, error) {
 	for _, lang := range languages {
 		fmt.Printf("%d - %s - %s\n", lang.ID, lang.Code, lang.Name)
 	}
-	fmt.Println("Select language by typing its code or number:")
+	fmt.Println("Select language by typing its number:")
 
 	//scan the user input
 	scanned := state.Scan(os.Stdin)
@@ -48,7 +48,7 @@ func (state *AppState) SelectLang() (database.Language, error) {
 
 	//saving the language into config
 	userconfig := Config{}
-	userconfig.LastLanguage = language.Code
+	userconfig.LastLanguage = language.ID
 	err = state.SaveConfig(userconfig)
 	if err != nil {
 		return database.Language{}, err
