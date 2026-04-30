@@ -60,3 +60,63 @@ everything above will be in the 1.0 version
 - additional resources for input learning
 - text to speech
 - subscription or paygate system (just for learning, I intend for this project to stay open source)
+
+## Instalation guide:
+### Prerequisites
+
+- **Go** 1.24.3 or later
+- **PostgreSQL** 12 or later
+- **Goose**
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DXICIDE/MagisterLinguae
+cd MagisterLinguae
+```
+
+### 2. Create the Databases
+```bash
+sudo -u postgres psql   # Linux/macOS
+psql -U postgres         # Windows
+```
+
+#### inside create these db
+```sql
+CREATE DATABASE words;
+CREATE DATABASE magisterlinguae_test;
+\q
+```
+
+### 3. Configure environment
+Create a .env file in the project root:
+
+DB_URL="postgres://postgres:YOUR_PASSWORD@localhost:5432/words"
+TEST_DB_URL="postgres://postgres:YOUR_PASSWORD@localhost:5432/magisterlinguae_test"
+
+
+### 4. Install goose if u dont have and run the migrations
+```bash
+go install github.com/pressly/goose/v3/cmd/goose@latest
+goose -dir sql/schema postgres "postgres://postgres:YOUR_PASSWORD@localhost:5432/words" up
+```
+#### ⚠️ Migration 005_newprimkey.sql clears existing word data (TRUNCATE). This only affects you if you're re-running migrations on an existing database. ⚠️
+
+### 4.
+```bash
+go run .
+```
+#### You should see:
+```bash
+Select language to learn please:
+1 - it - Italian
+2 - cz - Czech
+Select language by typing its number:
+```
+### Troubleshooting:
+
+**connection refused**  -   Ensure PostgreSQL is running: sudo systemctl start postgresql
+**password authentication**  -  failed Check that the password in .env matches your PostgreSQL password
+**database "words" does not exist** -	Run Step 2 again
+**goose: command not found** -	Run Step 4 again; ensure $GOPATH/bin is in your PATH
+**Tables don't exist or errors on startup** -   Re-run migrations from Step 5
