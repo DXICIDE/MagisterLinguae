@@ -116,8 +116,8 @@ Select language by typing its number:
 ```
 ### Troubleshooting:
 
-- **connection refused**  -   Ensure PostgreSQL is running: sudo systemctl start postgresql
+- **connection refused**  -   Ensure PostgreSQL is running: sudo systemctl start postgresql - sudo systemctl status postgresql.service
 - **password authentication**  -  failed Check that the password in .env matches your PostgreSQL password
 - **database "words" does not exist** -	Run Step 2 again
 - **goose: command not found** -	Run Step 4 again; ensure $GOPATH/bin is in your PATH
-- **Tables don't exist or errors on startup** -   Re-run migrations from Step 5
+- **Tables don't exist or errors on startup** -   Re-run migrations from Step 4
