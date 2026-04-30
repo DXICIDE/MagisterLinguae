@@ -41,13 +41,13 @@ These all will be updated depending on what is completed and what new comes up
 - ranking the words based on frequency, especially the unknown ones, so you know which one to learn ✅
 - add support for files ✅
 - help command ✅
-- subtitles and youtube transcript compatibility 
+- subtitles and youtube transcript compatibility ✅
 - supporting other languages ✅
 - ability to create multiple own instances of languages/tabs ✅
-- dictionary api 
+- dictionary api ✅
 - quiz based on words u know and have not seen for a long time, kinda like anki or something like that ✅
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books) ✅
-- docker support
+- docker support ❌ decided against it as it adds low benefit, will be added once the project has web UI
 
 everything above will be in the 1.0 version
 (The holy grail)

@@ -28,7 +28,7 @@ func main() {
 	dbURL := os.Getenv("DB_URL")
 	db, err := sql.Open("postgres", dbURL)
 	if err != nil {
-		fmt.Printf("Couldn't connect to the DB: %s", err)
+		log.Fatalf("Couldn't connect to the DB: %s", err)
 	}
 
 	//loading db to Appstate, loads the db and the language
@@ -39,7 +39,7 @@ func main() {
 	//loading config
 	userConfig, err := state.GetConfig()
 	if err != nil {
-		log.Fatalf("%s", err)
+		log.Fatalf("could not get the user config: %s", err)
 	}
 
 	//loading last language used

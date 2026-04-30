@@ -28,7 +28,6 @@ func (state *AppState) Learn(words []string) (string, error) {
 
 		//if the word is not in db
 		if err == sql.ErrNoRows {
-			fmt.Printf("Word %s not found\n", wordName)
 			err = state.createWordDB(word, false)
 			if err != nil {
 				return "", err
@@ -43,7 +42,6 @@ func (state *AppState) Learn(words []string) (string, error) {
 
 			//if the word is in db
 		} else {
-			fmt.Printf("Word '%s' already exists\n", word)
 
 			//update the last time we saw the word and frequency +1
 			updateWordSeenParams := database.UpdateWordSeenParams{TokenName: word, LanguageID: state.CurrentLanguage.ID}
