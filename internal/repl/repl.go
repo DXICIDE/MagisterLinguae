@@ -3,7 +3,6 @@ package repl
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -88,7 +87,11 @@ func Replfunc(state *AppState) {
 
 			err = state.Db.SeedLanguages(context.Background())
 			if err != nil {
-				log.Fatalf("couldn't seed languages: %s", err)
+				fmt.Printf("couldn't seed languages: %s", err)
+			}
+			err = os.Remove("conf.json")
+			if err != nil && !os.IsNotExist(err) {
+				fmt.Printf("couldn't remove config: %s", err)
 			}
 
 			fmt.Println("db was successfully reset and reseeded!")
