@@ -1,4 +1,4 @@
-# MagisterLinguae 0.4.1
+# MagisterLinguae 1.0.0
 A tool that helps u learn languages
 
 The name comes from latin, Magister linguae is Latin for master of language or teacher of language. I thought it would be fitting for this kind of project
@@ -15,43 +15,32 @@ but only for single words or short phrases, you're not really supposed to transl
 
 The project is written in Go, as it's my most used language, It's currently REPL, web UI will be coming later.
 
-This is the alpha version, anything included is prone to bugs and partly correct implementations, it should be believed that everything in this build will probably
-not stay the same in the release of 1.0
-
-Current version is 0.4.1, I tried to add more tests, but fell short. I would have to simulate user input in a lot of functions which would mean a lot of rewriting, I'm just gonna finish
-the app, then test everything
+Current version is 1.0.0, finally we got here. This should contain everything needed for a decent language learning program. All features down below. Now the main focus 
+will be to add a basic UI, nobody likes to stare at command console the whole time. Also Feel free to send me your ideas of things you'd like added. 
 
 ## Current features: 
 - The program can recognise words (case insensitive) which are then stored in db
 - Words are stored stored with boolean known and unknown, user marks words that he knows, any other are unknown*
 - Words are arranged back into previous sentences, unknown words are distinguishable by these brackets "[]" in the stdout
-- Currently supports only Italian, other languages haven't been tested
+- Currently supports only Italian, Czech, technically should support most of the romance languages, test on your own
+- lookup, u can search word words in db, if they are there or not and the last time u seen them + frequency
+- prompting the user to mark words as known after reaching certain frequency of the word
+- user manually changing the words he forgot to unknown
+- ranking the words based on frequency, especially the unknown ones, so you know which one to learn
+- support for files
+- subtitles and youtube transcript compatibility
+- ability to create multiple own instances of languages/tabs 
+- dictionary api
+- anki
+- L'italiano Secondo Il Metodo Natura transcript available as a start. (work in progress, its too long to complete swiftly)
 
 *known words should be marked when user completely understands them 
 
 These all will be updated depending on what is completed and what new comes up
 ### Future features (dopamine corner):
 (based on priority and its complexity, most important and least complex are on top)
-- refactorization of the code, make it simpler, cleaner and more readable ✅
-- lookup, u can search word words in db, if they are there or not and the last time u seen them + frequency ✅
-- probably REPL, makes the use of program very easier, at least for marking ✅
-- prompting the user to mark words as known after reaching certain frequency of the word ✅
-- tests ✅
-- user manually changing the words he forgot to unknown ✅
-- ranking the words based on frequency, especially the unknown ones, so you know which one to learn ✅
-- add support for files ✅
-- help command ✅
-- subtitles and youtube transcript compatibility ✅
-- supporting other languages ✅
-- ability to create multiple own instances of languages/tabs ✅
-- dictionary api ✅
-- quiz based on words u know and have not seen for a long time, kinda like anki or something like that ✅
-- L'italiano Secondo Il Metodo Natura transcript available as a start. (maybe even more graded books) ✅
-- docker support ❌ decided against it as it adds low benefit, will be added once the project has web UI
-
-everything above will be in the 1.0 version
-(The holy grail)
 - web UI - version 2.0
+- docker
 
 #### Optional:
 - AI support

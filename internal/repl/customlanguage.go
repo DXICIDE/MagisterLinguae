@@ -9,7 +9,9 @@ import (
 )
 
 func (state *AppState) CustomLanguage() error {
-	fmt.Println("Please enter a code which u will use as a switch command, the code must be shorter than 11 characters:")
+	fmt.Println("Please enter a code which u will use as a switch command, the code must be shorter than 11 characters")
+	fmt.Println("I recommend using the short form ISO 639-1 standard aka the two letter abbreviations,")
+	fmt.Println("otherwise the dictionary function will not work:")
 	code := state.Scan(os.Stdin)
 	if len(code) != 1 {
 		return fmt.Errorf("Too many or too few words!")
