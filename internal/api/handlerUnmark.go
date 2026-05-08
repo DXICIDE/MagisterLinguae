@@ -8,19 +8,11 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/DXICIDE/MagisterLinguae/internal/database"
 )
 
-type WordResponse struct {
-	Word       string    `json:"word"`
-	Known      bool      `json:"known"`
-	Frequency  int       `json:"frequency"`
-	LastSeenAt time.Time `json:"last_seen_at"`
-}
-
-func (h *Handler) GetWord(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Unmark(w http.ResponseWriter, r *http.Request) {
 	word := strings.ToLower(r.PathValue("word"))
 	languageID := r.URL.Query().Get("language_id")
 
@@ -30,10 +22,7 @@ func (h *Handler) GetWord(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	wordDB, err := h.Db.GetWord(r.Context(), database.GetWordParams{
-		TokenName:  word,
-		LanguageID: int32(ID),
-	})
+	wordDB, err := h.Db.GetWord(r.Context(), database.GetWordParams{TokenName: word, LanguageID: int32(ID)})
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -45,6 +34,16 @@ func (h *Handler) GetWord(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = h.Db.UpdateWordUnKnown(r.Context(), database.UpdateWordUnKnownParams{TokenName: wordDB.TokenName, LanguageID: int32(ID)})
+
+	if err != nil {
+		log.Printf("UpdateWordUnKnown error: %v", err)
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	wordDB.Known = false
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(WordResponse{
 		Word:       wordDB.TokenName,
@@ -52,5 +51,4 @@ func (h *Handler) GetWord(w http.ResponseWriter, r *http.Request) {
 		Frequency:  int(wordDB.Frequency),
 		LastSeenAt: wordDB.LastSeenAt,
 	})
-
 }

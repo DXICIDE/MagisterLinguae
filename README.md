@@ -41,6 +41,7 @@ These all will be updated depending on what is completed and what new comes up
 (based on priority and its complexity, most important and least complex are on top)
 - web UI - version 2.0
 - docker
+- text analyzer - tells you if the text is too hard for you based on % of unknown words
 
 #### Optional:
 - AI support
