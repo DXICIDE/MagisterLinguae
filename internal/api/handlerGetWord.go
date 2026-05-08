@@ -19,10 +19,6 @@ type WordResponse struct {
 	LastSeenAt time.Time `json:"last_seen_at"`
 }
 
-type Handler struct {
-	db *database.Queries
-}
-
 func (h *Handler) GetWord(w http.ResponseWriter, r *http.Request) {
 	word := r.PathValue("word")
 	languageID := r.URL.Query().Get("language_id")
@@ -33,7 +29,7 @@ func (h *Handler) GetWord(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	wordDB, err := h.db.GetWord(r.Context(), database.GetWordParams{
+	wordDB, err := h.Db.GetWord(r.Context(), database.GetWordParams{
 		TokenName:  word,
 		LanguageID: int32(ID),
 	})
