@@ -15,5 +15,7 @@ func NewRouter(h *Handler) http.Handler {
 
 	mux.HandleFunc("GET /api/words/{word}", h.GetWord)
 	mux.HandleFunc("GET /api/languages", h.GetLanguages)
+	mux.HandleFunc("GET /api/languages/current", h.GetCurrentLanguage)
+	mux.HandleFunc("PUT /api/languages/current", h.PutCurrentLanguage)
 	return mux
 }
