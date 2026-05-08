@@ -49,7 +49,7 @@ func (state *AppState) SelectLang() (database.Language, error) {
 	//saving the language into config
 	userconfig := Config{}
 	userconfig.LastLanguage = language.ID
-	err = state.SaveConfig(userconfig)
+	err = SaveConfig(userconfig)
 	if err != nil {
 		return database.Language{}, err
 	}

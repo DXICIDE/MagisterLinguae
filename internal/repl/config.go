@@ -10,7 +10,7 @@ type Config struct {
 	LastLanguage int32 `json:"last_language"`
 }
 
-func (state *AppState) GetConfig() (Config, error) {
+func GetConfig() (Config, error) {
 	//if the file doesnt exist, return empty config with no err
 	file, err := os.Open("conf.json")
 	if err != nil {
@@ -34,7 +34,7 @@ func (state *AppState) GetConfig() (Config, error) {
 	return config, err
 }
 
-func (state *AppState) SaveConfig(config Config) error {
+func SaveConfig(config Config) error {
 	file, err := os.OpenFile("conf.json", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		return fmt.Errorf("failed to open config file for writing: %w", err)

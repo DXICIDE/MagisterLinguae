@@ -37,7 +37,7 @@ func main() {
 	state.Db = dbQueries
 
 	//loading config
-	userConfig, err := state.GetConfig()
+	userConfig, err := repl.GetConfig()
 	if err != nil {
 		log.Fatalf("could not get the user config: %s", err)
 	}

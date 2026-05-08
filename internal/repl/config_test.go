@@ -20,11 +20,11 @@ func TestConfig(t *testing.T) {
 		t.Fatalf("Getting the language failed: %s", err)
 	}
 	config := Config{LastLanguage: 1}
-	state.SaveConfig(config)
+	SaveConfig(config)
 	defer os.Remove("conf.json")
 
 	// Test
-	config, err = state.GetConfig()
+	config, err = GetConfig()
 	if err != nil {
 		t.Fatalf("unexpected error: %s", err)
 	}
