@@ -10,7 +10,8 @@ import (
 )
 
 func (state *AppState) AnkiTest() error {
-	words, err := state.Db.GetAnki(context.Background(), state.CurrentLanguage.ID)
+
+	words, err := state.Db.GetAnki(context.Background(), database.GetAnkiParams{LanguageID: state.CurrentLanguage.ID, Limit: 20})
 	if err != nil {
 		return err
 	}

@@ -13,11 +13,16 @@ const getAnki = `-- name: GetAnki :many
 SELECT token_name, last_seen_at, known, frequency, promted_user_to_mark, language_id FROM words
 WHERE frequency > 3 AND language_id = $1 AND known = true
 ORDER BY last_seen_at ASC 
-LIMIT 30
+LIMIT $2
 `
 
-func (q *Queries) GetAnki(ctx context.Context, languageID int32) ([]Word, error) {
-	rows, err := q.db.QueryContext(ctx, getAnki, languageID)
+type GetAnkiParams struct {
+	LanguageID int32
+	Limit      int32
+}
+
+func (q *Queries) GetAnki(ctx context.Context, arg GetAnkiParams) ([]Word, error) {
+	rows, err := q.db.QueryContext(ctx, getAnki, arg.LanguageID, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
