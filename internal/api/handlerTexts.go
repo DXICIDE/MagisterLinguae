@@ -25,7 +25,7 @@ type TextStats struct {
 	UnknownWords int `json:"unknown_words"`
 }
 
-var body struct {
+type body struct {
 	Text       string `json:"text"`
 	LanguageID int32  `json:"language_id"`
 }
@@ -34,7 +34,7 @@ func (h *Handler) ProcessText(w http.ResponseWriter, r *http.Request) {
 	var totalWords, knownWords, unknownWords int
 
 	decoder := json.NewDecoder(r.Body)
-	params := body
+	params := body{}
 	err := decoder.Decode(&params)
 
 	log.Printf("Received text: %q, language_id: %d", params.Text, params.LanguageID)

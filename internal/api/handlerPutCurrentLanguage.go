@@ -16,7 +16,7 @@ func (h *Handler) PutCurrentLanguage(w http.ResponseWriter, r *http.Request) {
 	err := decoder.Decode(&params)
 	if err != nil {
 		log.Printf("Error decoding parameters: %s", err)
-		http.Error(w, "internal server error", http.StatusBadRequest)
+		http.Error(w, "wrong json format", http.StatusBadRequest)
 		return
 	}
 
