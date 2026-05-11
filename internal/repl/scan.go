@@ -16,10 +16,10 @@ func (state *AppState) Scan(r io.Reader) []string {
 	if !scan.Scan() {
 		return nil
 	}
-	return state.tokenizeString(scan.Text())
+	return TokenizeString(scan.Text())
 }
 
-func (state *AppState) tokenizeString(line string) []string {
+func TokenizeString(line string) []string {
 	line = strings.TrimSpace(line)
 	if line == "" {
 		return nil

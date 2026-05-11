@@ -19,5 +19,6 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("PUT /api/languages/current", h.PutCurrentLanguage)
 	mux.HandleFunc("PUT /api/words/{word}/mark", h.Mark)
 	mux.HandleFunc("PUT /api/words/{word}/unmark", h.Unmark)
+	mux.HandleFunc("POST /api/texts/process", h.ProcessText)
 	return mux
 }

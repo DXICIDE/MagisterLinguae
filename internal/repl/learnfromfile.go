@@ -29,12 +29,12 @@ func (state *AppState) LearnFromFilePath(path string) (string, error) {
 	for {
 		line, err := r.ReadString('\n')
 		if err != nil {
-			words = state.tokenizeString(line)
+			words = TokenizeString(line)
 			sentence, err = state.Learn(words)
 			paragraphs += sentence
 			break
 		}
-		words = state.tokenizeString(line)
+		words = TokenizeString(line)
 		sentence, err = state.Learn(words)
 		sentence = sentence + "\n"
 		paragraphs += sentence
