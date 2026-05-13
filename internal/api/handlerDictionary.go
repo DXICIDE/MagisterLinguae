@@ -11,7 +11,6 @@ import (
 	"github.com/DXICIDE/MagisterLinguae/internal/repl"
 )
 
-// stdin scan
 func (h *Handler) Dictionary(w http.ResponseWriter, r *http.Request) {
 	word := r.PathValue("word")
 
