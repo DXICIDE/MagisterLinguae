@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import TextProcessor from './components/TextProcessor';
 
 function App() {
   const [activeTab, switchTab] = useState(null);
@@ -35,6 +36,7 @@ function App() {
           {lang.Name}
         </button>
       ))}
+      <TextProcessor/>
     </div>
   );
 }
