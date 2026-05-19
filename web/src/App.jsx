@@ -36,7 +36,7 @@ function App() {
           {lang.Name}
         </button>
       ))}
-      <TextProcessor/>
+      <TextProcessor activeTab={activeTab} />
     </div>
   );
 }
