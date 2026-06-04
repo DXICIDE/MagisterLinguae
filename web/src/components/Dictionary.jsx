@@ -27,13 +27,13 @@ function Dictionary({ activeTab }) {
 
     return (
     <div>
-        <textarea className="InputDictionary"Ze
+        <textarea className="InputDictionary"
             spellCheck={false}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)} 
             rows={5} 
             cols={5}
-            placeholder="Paste your word here..."
+            placeholder="Type your word here..."
         />
         <button onClick={handleDict}>Process</button>
         <p>{Result?.error}</p>
@@ -55,24 +55,5 @@ function Dictionary({ activeTab }) {
     </div>    
   );
 }
-
-// fmt.Printf("Word: %s\n", responseObject.Word)
-// 	for _, entry := range responseObject.Entries {
-// 		fmt.Printf("PartOfSpeech: %s\n", entry.PartOfSpeech)
-// 		for _, sense := range entry.Senses {
-// 			fmt.Printf(" Definition: %s\n", sense.Definition)
-// 			for _, tag := range sense.Tags {
-// 				fmt.Printf("  Tags: %s\n", tag)-*
-// 			}
-// 			for _, example := range sense.Examples {
-// 				fmt.Printf("  Example: %s\n", example)
-// 			}
-// 		}
-// 	}
-
-  //fmt.Printf("\nSource: %s\n", responseObject.Source.URL)
-	// fmt.Println("License by:")
-	// fmt.Printf("name: %s\n", responseObject.Source.License.Name)
-	// fmt.Printf("url: %s\n\n", responseObject.Source.License.URL)
   
 export default Dictionary;

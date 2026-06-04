@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import TextProcessor from './components/TextProcessor';
 import Dictionary from './components/Dictionary';
+import Wordlist from './components/Wordlist';
+import Anki from './components/Anki';
 
 function App() {
   const [activeTab, switchTab] = useState(null);
@@ -48,7 +50,8 @@ function App() {
       </button>
       {activeSection === "text" && <TextProcessor activeTab={activeTab} />}
       {activeSection === "text" && <Dictionary activeTab={activeTab} />}
-      {activeSection === "Wordlist" && <WordList activeTab={activeTab} />}
+      {activeSection === "Wordlist" && <Wordlist activeTab={activeTab} />}
+      {activeSection === "anki" && <Anki activeTab={activeTab} />}
     </div>
   );
 }
