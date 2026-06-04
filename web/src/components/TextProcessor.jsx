@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function TextProcessor({ activeTab }) {
   const [inputText, setInputText] = useState("");
@@ -17,6 +17,12 @@ function TextProcessor({ activeTab }) {
     .then(response => response.json())
     .then(data => setProcessedResult(data.processed_text));
   }
+
+  useEffect(() => {
+    if (inputText.trim() !== "") {
+        handleProcess();
+    }
+  }, [activeTab]);
 
   function renderProcessedText(text) {
     console.log("Input to render:", text);

@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import TextProcessor from './components/TextProcessor';
+import Dictionary from './components/Dictionary';
 
 function App() {
   const [activeTab, switchTab] = useState(null);
   const [languagesApi, setLang] = useState([]);
+  const [activeSection, setActiveSection] = useState("text");
 
   
   useEffect(() => {
       fetch('/api/languages')
         .then(response => response.json())  
         .then(data => setLang(data));
-      console.log("Component loaded!");
       
       fetch('/api/languages/current')
         .then(response => response.json())  
@@ -36,7 +37,18 @@ function App() {
           {lang.Name}
         </button>
       ))}
-      <TextProcessor activeTab={activeTab} />
+      <button key={"text"} onClick={() => setActiveSection("text")}>
+          {"text"}
+      </button>
+      <button key={"Wordlist"} onClick={() => setActiveSection("Wordlist")}>
+          {"Wordlist"}
+      </button>
+      <button key={"anki"} onClick={() => setActiveSection("anki")}>
+          {"anki"}
+      </button>
+      {activeSection === "text" && <TextProcessor activeTab={activeTab} />}
+      {activeSection === "text" && <Dictionary activeTab={activeTab} />}
+      {activeSection === "Wordlist" && <WordList activeTab={activeTab} />}
     </div>
   );
 }
