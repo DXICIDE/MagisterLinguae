@@ -26,5 +26,6 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("DELETE /api/languages/{id}", h.DeleteLanguage)
 	mux.HandleFunc("POST /api/practice/start", h.Anki)
 	mux.HandleFunc("POST /api/practice/answer", h.AnkiAnswer)
+	mux.HandleFunc("POST /api/db/reset", h.ResetDb)
 	return mux
 }

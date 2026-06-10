@@ -3,12 +3,14 @@ import TextProcessor from './components/TextProcessor';
 import Dictionary from './components/Dictionary';
 import Wordlist from './components/Wordlist';
 import Anki from './components/Anki';
+import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 
 function App() {
   const [activeTab, switchTab] = useState(null);
   const [languagesApi, setLang] = useState([]);
   const [activeSection, setActiveSection] = useState("text");
-
+  const [deleteResponse, setDeleteResponse] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   
   useEffect(() => {
       fetch('/api/languages')
@@ -28,11 +30,38 @@ function App() {
     })
     .then(() => switchTab(lang));
   }
+
+  function resetLang() {
+    if (!window.confirm("Are you sure? This will delete ALL words in this language.")) {
+        return;
+    }
+    fetch(`/api/db/reset?language_id=${activeTab.ID}`, {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      setIsOpen(true);
+      setDeleteResponse(data);
+    });
+  }
   
   return (
     <div>
       <h1>MagisterLinguae</h1>
       <p>Current language: {activeTab?.Name}</p>
+      
+      <>
+      <button key={"reset"} onClick={() => (resetLang())}> <p>Reset</p> </button>
+      {isOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Language Reset</h3>
+            <p>{deleteResponse.message}, words deleted: {deleteResponse.words_deleted}</p>
+            <button onClick={() => setIsOpen(false)}>OK</button>
+          </div>
+      </div>
+      )}
+      </>
       
       {languagesApi.map(lang => (
         <button key={lang.ID} onClick={() => handleTabChange(lang)}>
