@@ -1,3 +1,4 @@
 .env
 conf.json
 web/node_modules
+.clocignore
