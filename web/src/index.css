@@ -3,3 +3,58 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.app-layout {
+    display: flex;
+    font-size: 30px;
+    min-height: 100vh;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    background-color: #16213e;
+    padding-top: 20px;
+}
+
+.main-content {
+    flex: 1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+#root {
+    height: 100%;
+}
+
+.sidebar-btn {  
+    padding: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #e0e0e0;
+}
+
+.sidebar-btn-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-btn.active {
+    cursor: pointer;
+    background-color: #14b8a6;
+    color: #1a1a2e;
+}
+
+.sidebar-btn:hover {
+    background-color: #0f766e;
+}
