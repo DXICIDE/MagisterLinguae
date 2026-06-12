@@ -87,7 +87,7 @@ function TextProcessor({ activeTab }) {
             placeholder="Paste your text here..."
         />
         <button onClick={handleProcess}>Process</button>
-        <p>{message}: {percentage*100}% known</p>
+        <p>{processedResult ? `${message}: ${percentage*100}% known` : ""}</p>
         <div className="myDiv">
             {processedResult ? renderProcessedText(processedResult) : "Processed text will appear here..."} 
         </div>

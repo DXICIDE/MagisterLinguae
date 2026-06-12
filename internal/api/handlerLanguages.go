@@ -51,5 +51,12 @@ func (h *Handler) DeleteLanguage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusNoContent)
+	var response struct {
+		Ok bool `json:"ok"`
+	}
+
+	response.Ok = true
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
