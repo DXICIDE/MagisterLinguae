@@ -69,20 +69,22 @@ function refreshLanguages() {
       <div className="main-content">
 
       <h1>MagisterLinguae</h1>
-      <p>Current language: {activeTab?.Name}</p>
 
       <button key="settings" onClick={() => setActiveSection("settings")}>
           Settings
         </button>
+      
+      <div className="tabs-bar">
+      {languagesApi.map(lang => (
+        <button className={`tab-btn ${activeTab?.ID === lang.ID ? "active" : ""}`} onClick={() => handleTabChange(lang)}>
+          {lang.Name}
+        </button>
+      ))}
+      </div>
       {activeSection === "settings" && <Settings activeTab={activeTab} onSuccess={() => {
             setActiveSection("text");
             refreshLanguages();
         }} />}
-      {languagesApi.map(lang => (
-        <button key={lang.ID} onClick={() => handleTabChange(lang)}>
-          {lang.Name}
-        </button>
-      ))}
       <button key={"+"} onClick={() => setActiveSection("+")}>
           {"+"}
       </button>

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { FiArrowRight } from 'react-icons/fi';
 
 function TextProcessor({ activeTab }) {
   const [inputText, setInputText] = useState("");
   const [processedResult, setProcessedResult] = useState("");
   const [percentage, setPercentage] = useState(0);
   const [message, setMessage] = useState("");
+  const [badgeClass, setbadgeClass] = useState("");
 
   //api for the text
   function handleProcess() {
@@ -62,23 +64,27 @@ function TextProcessor({ activeTab }) {
     setPercentage(pct)
     if (pct >= 0.79 && pct <= 0.91) {
       setMessage("Ideal difficulty")
+      setbadgeClass("ideal")
     }
     if (0.91 < pct ) {
       setMessage("Too easy!")
+      setbadgeClass("too-easy")
     }
     if ( pct < 0.79 ) {
-      setMessage("Pretty hard")
+      setMessage("pretty hard")
+      setbadgeClass("pretty-hard")
     }
 
     if ( pct < 0.69 ) {
       setMessage("Too hard!")
+      setbadgeClass("too-hard")
     }
     
   }
   
   return (
-    <div>
-        <textarea className="InputBox"
+    <div className="processor-layout">
+        <textarea className="input-box"
             spellCheck={false}
             value={inputText} 
             onChange={(e) => setInputText(e.target.value)} 
@@ -86,13 +92,20 @@ function TextProcessor({ activeTab }) {
             cols={60}
             placeholder="Paste your text here..."
         />
-        <button onClick={handleProcess}>Process</button>
-        <p>{processedResult ? `${message}: ${percentage*100}% known` : ""}</p>
-        <div className="myDiv">
-            {processedResult ? renderProcessedText(processedResult) : "Processed text will appear here..."} 
+        <div className="button-container">
+          <button className="button-process" onClick={handleProcess}>
+            <span className="arrow-icon">{'>'}</span>
+          </button>
+        </div>
+        <div className="output-area">
+          {processedResult ? renderProcessedText(processedResult) : ""} 
+          {processedResult && (
+            <span className={`difficulty-badge ${badgeClass}`}>
+              {message} {Math.round(percentage * 100)}% known
+            </span>
+            )}
         </div>
     </div>
-    
   );
 }
 

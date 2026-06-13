@@ -20,6 +20,8 @@
 
 .main-content {
     flex: 1;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
@@ -57,4 +59,111 @@ body {
 
 .sidebar-btn:hover {
     background-color: #0f766e;
+}
+
+.processor-layout {
+    display: flex;
+    gap: 20px;
+}
+
+.button-process {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #14b8a6;
+    cursor: pointer;
+    font-size: 40px;
+}
+
+.button-process:hover {
+    background-color: #0f766e;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.input-box, .output-area {
+    background-color: #16213e;
+    border: 1px solid #2a2a4a;
+    border-radius: 8px;
+    padding: 15px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    max-width: 600px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+}
+
+.InputBox:focus {
+    outline: none;
+    border-color: #14b8a6;
+}
+
+.input-box {
+    flex: 1;
+    margin: 20px;
+    min-height: 200px;
+    height: auto;
+}
+
+.output-area {
+    position: relative;
+    padding-bottom: 40px;
+    flex: 1;
+    margin: 20px;
+}
+
+
+.difficulty-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.too-hard { background-color: #ef4444; color: white; }
+.ideal { background-color: #05ea55; color: #1a1a2e; }
+.too-easy { background-color: #14b8a6; color: #1a1a2e; }
+.pretty-hard { background-color: #f59e0b; color: #1a1a2e; }
+
+.tab-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #a0a0b0;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    outline: 1px solid #2a2a4a;
+    outline-offset: -1px;
+}
+
+.tab-btn.active {
+    background-color: #14b8a6;
+    color: #1a1a2e;
+}
+
+.tab-btn:hover:not(.active) {
+    background-color: #2a2a4a;
+}
+
+.tabs-bar {
+    display: flex;
+    gap: 8px;
+    padding: 15px 20px;
+    align-items: center;
 }
