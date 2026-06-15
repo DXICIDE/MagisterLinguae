@@ -13,6 +13,7 @@ function App() {
   const [languagesApi, setLang] = useState([]);
   const [activeSection, setActiveSection] = useState("text");
   const [deleteResponse, setDeleteResponse] = useState("");
+  const [prevSection, setPrevSection] = useState("text");
   
   useEffect(() => {
       refreshLanguages()
@@ -37,6 +38,15 @@ function refreshLanguages() {
     })
     .then(switchTab(lang));
   }
+
+  function handlePlusClick() {
+    if (activeSection === "+") {
+        setActiveSection(prevSection);
+    } else {
+        setPrevSection(activeSection);
+        setActiveSection("+");
+    }
+}
   
   return (
     <div className="app-layout">
@@ -68,11 +78,8 @@ function refreshLanguages() {
       </div>
       <div className="main-content">
 
-      <h1>MagisterLinguae</h1>
+      <h1 className='logo'>MagisterLinguae</h1>
 
-      <button key="settings" onClick={() => setActiveSection("settings")}>
-          Settings
-        </button>
       
       <div className="tabs-bar">
       {languagesApi.map(lang => (
@@ -80,15 +87,19 @@ function refreshLanguages() {
           {lang.Name}
         </button>
       ))}
+      <button className='plus-btn' onClick={() => handlePlusClick("+")}>
+          {"+"}
+      </button>
+      <button className='settings-btn' key="settings" onClick={() => setActiveSection("settings")}>
+          <FiSettings size={20} />
+      </button>
       </div>
       {activeSection === "settings" && <Settings activeTab={activeTab} onSuccess={() => {
             setActiveSection("text");
             refreshLanguages();
         }} />}
-      <button key={"+"} onClick={() => setActiveSection("+")}>
-          {"+"}
-      </button>
       
+      <div className='textbar'>
       {activeSection === "text" && <TextProcessor activeTab={activeTab} />}
       {activeSection === "text" && <Dictionary activeTab={activeTab} />}
       {activeSection === "Wordlist" && <Wordlist activeTab={activeTab} />}
@@ -97,6 +108,7 @@ function refreshLanguages() {
             setActiveSection("text");
             refreshLanguages();
         }} />}
+      </div>
       </div>
     </div>
   );

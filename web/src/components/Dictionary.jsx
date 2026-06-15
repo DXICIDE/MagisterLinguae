@@ -26,16 +26,19 @@ function Dictionary({ activeTab }) {
   
 
     return (
-    <div>
+    <div className='dictionary'>
+      <div className='dict-container'>
+      <h5 className='dict-h5'>Dictionary</h5>
         <textarea className="InputDictionary"
             spellCheck={false}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)} 
-            rows={5} 
+            rows={1} 
             cols={5}
-            placeholder="Type your word here..."
+            placeholder="Type here..."
         />
-        <button onClick={handleDict}>Process</button>
+        <button className='dict-btn' onClick={handleDict}>Process</button>
+        </div>
         <p>{Result?.error}</p>
         {Result && !Result.error && (
         <div className="outputDictionary">
@@ -44,7 +47,7 @@ function Dictionary({ activeTab }) {
             <>
               <p key={i}>Part Of Speech: {entry.partOfSpeech}</p>
               {entry.senses?.map((sense, j) => (
-              <p key={j}>{j+1}. Definition: {sense.definition} Tag: {sense.tags} {sense.Examples}</p>
+              <p key={j}>{j+1}. Definition: {sense.definition} Tag: {sense.tags.join(", ")} {sense.Examples}</p>
               ))}
             </>
             ))}

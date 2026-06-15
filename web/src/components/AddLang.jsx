@@ -23,24 +23,20 @@ function AddLanguage({ onSuccess }) {
     }
 
     return (
-    <div>
-        <textarea className="InputName"
-            spellCheck={false}
+    <div className="add-lang-form">
+        <input 
+            className="add-lang-input"
             value={inputName}
-            onChange={(e) => setInputName(e.target.value)} 
-            rows={1} 
-            cols={5}
-            placeholder="Type the name of the tab"
+            onChange={(e) => setInputName(e.target.value)}
+            placeholder="Language name"
         />
-        <textarea className="InputCode"
-            spellCheck={false}
+        <input 
+            className="add-lang-input"
             value={inputCode}
-            onChange={(e) => setInputCode(e.target.value)} 
-            rows={1} 
-            cols={2}
-            placeholder="Type the international code of the lang"
+            onChange={(e) => setInputCode(e.target.value)}
+            placeholder="Language code (e.g., fr)"
         />
-        <button onClick={() => addLanguage()}>Add</button>
+        <button className="add-lang-btn" onClick={() => addLanguage()}>Add</button>
     </div>    
     );
 }

@@ -15,6 +15,7 @@ function Settings({ activeTab, onSuccess }) {
     .then(response => response.json())
     .then(data => {
     setDeleteResponse(data);
+    setIsOpen(true)
     });
     }
 
@@ -31,17 +32,15 @@ function Settings({ activeTab, onSuccess }) {
     }
     
     return (
-    <div>
-        <button key={"delete"} onClick={() => (deleteTab())}> <p>Delete current language</p> </button>
-        <button key={"reset"} onClick={() => (resetLang(), setIsOpen(true))}> <p>Reset current language</p> </button>
+    <div className='settings'>
+        <button className='setting-lang-btn' onClick={() => (deleteTab())}> <p>Delete current language</p> </button>
+        <button className='setting-lang-btn' onClick={() => (resetLang())}> <p>Reset current language</p> </button>
+        <button className='close-btn' onClick={() => (onSuccess())}> <p>Close</p> </button>
         {isOpen && (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <h3>Language Reset</h3>
+            <div className="Reset-content">
                 <p>{deleteResponse.message}, words deleted: {deleteResponse.words_deleted}</p>
-                <button onClick={() => setIsOpen(false)}>OK</button>
+                <button className="ok-btn" onClick={() => (onSuccess(), setIsOpen(false))}>OK</button>
             </div>
-        </div>
         )}
     </div>
     );
