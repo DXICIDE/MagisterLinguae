@@ -14,14 +14,23 @@ function Wordlist({ activeTab }) {
     }, [activeTab]);
     
     return (  
-        <div>
-        <p> Word known frequency lastseen</p>
+        <div className='list-container'>
+        <div className='list-header'>
+            <p className='list-word'>Word</p>
+            <p className='list-known'>Known</p>
+            <p className='list-frequency'>Freq</p>
+            <p className='list-seen'>Last Seen</p>
+        </div>
+        <div className='list'>
         {Words?.map((Word, i) => (
-            <>
-                
-                <p key={i}> {Word.word} {Word.known ? "Yes" : "No"}  {Word.frequency}  {Word.last_seen_at}</p>
-            </>
+            <div className='list-items'>
+                <p className='list-word'> {Word.word} </p>
+                <p className='list-known'> {Word.known ? "Yes" : "No"} </p>
+                <p className='list-frequency'> {Word.frequency}  </p>
+                <p className='list-seen'> {new Date(Word.last_seen_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+            </div>
             ))}
+        </div>
         </div>
     );
 }
