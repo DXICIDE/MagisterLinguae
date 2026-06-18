@@ -309,7 +309,7 @@ body {
     cursor: pointer;
 }
 
-.ok-btn:hover, .settings-btn:hover, .setting-lang-btn:hover, .close-btn:hover, .plus-btn:hover {
+.ok-btn:hover, .settings-btn:hover, .setting-lang-btn:hover, .close-btn:hover, .plus-btn:hover, .anki-start-btn:hover {
     background-color: #2a2a4a;
 }
 
@@ -419,4 +419,97 @@ body {
 
 .list-header p {
     margin: 1px;
+}
+
+.output-area {
+    white-space: pre-wrap;
+}
+
+.anki-start-btn {
+    background-color: transparent;
+    color: #a0a0b0;
+    border: none;
+    outline: 1px solid #2a2a4a;
+    outline-offset: -1px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.anki-input {
+    background-color: #16213e;
+    border: 1px solid #2a2a4a;
+    border-radius: 20px;
+    padding: 6px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: 'Arial Narrow';
+    text-align: center;
+}
+
+.anki-input:focus {
+    outline: none;
+    border-color: #14b8a6;
+}
+
+.anki-start {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.know, .dontknow {
+    background-color: transparent;
+    color: #a0a0b0;
+    border: none;
+    outline: 1px solid #2a2a4a;
+    outline-offset: -1px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.know{
+    padding: 8px 48px;
+}
+
+.anki-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.know:hover, .dontknow:hover, .practice-again-btn:hover {
+    background-color: #2a2a4a;
+}
+
+.anki-word {
+    display: flex;
+    justify-content: center;
+}
+
+.practice-again-btn {
+    background-color: transparent;
+    color: #a0a0b0;
+    border: none;
+    outline: 1px solid #2a2a4a;
+    outline-offset: -1px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.anki-stats{
+    font-size: 20px;
+}
+
+.anki-end {
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

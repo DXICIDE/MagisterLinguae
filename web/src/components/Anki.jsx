@@ -5,7 +5,7 @@ function Anki({ activeTab }) {
     const [index, setIndex] = useState(0);
     const [correct, setCorrect] = useState(0);
     const [wrong, setWrong] = useState(0);
-    const [anki, setAnki] = useState(50);
+    const [anki, setAnki] = useState(10);
     const [prog, setProg] = useState("start");
     
     function ankistart() {
@@ -51,8 +51,10 @@ function Anki({ activeTab }) {
             {prog == "start" && (
             <div>
             <p>Input how many words you would like to practice</p>
-            <button onClick={() => ankistart()}>Start</button>
+            <div className='anki-start'>
+            <button className='anki-start-btn' onClick={() => ankistart()}>Start</button>
             <input 
+            className='anki-input'
             type="number" 
             value={anki} 
             onChange={(e) => setAnki(Number(e.target.value))} 
@@ -60,22 +62,25 @@ function Anki({ activeTab }) {
             max={50}
             />
             </div>
+            </div>
             )}
-            {Array && Array.length > 0 && index < anki && prog == "running" && (
+            {Array && Array.length > 0 && prog == "running" && (
             <div>
-                <p>{Array[index]?.word}</p>
-                <button onClick={() => (ankianswer(Array[index].word, true), setCorrect(correct => correct + 1))}>Know</button>
-                <button onClick={() => (ankianswer(Array[index].word, false), setWrong(wrong => wrong + 1))}>Can't remember</button>
+                <p className='anki-word'>{Array[index]?.word}</p>
+                <div className='anki-buttons'>
+                <button className='know' onClick={() => (ankianswer(Array[index].word, true), setCorrect(correct => correct + 1))}>Know</button>
+                <button className='dontknow' onClick={() => (ankianswer(Array[index].word, false), setWrong(wrong => wrong + 1))}>Can't remember</button>
+                </div>
             </div>
             )}            
             {Array && Array.length === 0 && (
             <p>All Caught Up!</p>
             )}
             {prog == "end" && (
-                <div>
+                <div className='anki-end'>
                     <p>Completed!</p>
-                    <p>Correct:{correct} Wrong:{wrong}</p>
-                    <button onClick={() => setProg("start")}>Practice Again</button>
+                    <p className='anki-stats'>Remembered: {correct} Forgot: {wrong}</p>
+                    <button className='practice-again-btn' onClick={() => setProg("start")}>Practice Again</button>
                 </div>
             )}
         </div>

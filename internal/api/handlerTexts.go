@@ -53,7 +53,7 @@ func (h *Handler) ProcessText(w http.ResponseWriter, r *http.Request) {
 			//if the word is any of these, we dont do anything
 			word := wordName
 			word = strings.ToLower(word)
-			if word == "," || word == "." || word == "?" || word == "!" || word == "-" || word == ";" || word == ":" || word == "«" || word == "»" || word == "(" || word == ")" {
+			if word == "," || word == "." || word == "?" || word == "!" || word == "-" || word == ";" || word == ":" || word == "«" || word == "»" || word == "(" || word == ")" || word == `"` {
 				processedTokens = append(processedTokens, wordName)
 				continue
 			}
