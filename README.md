@@ -33,15 +33,16 @@ will be to add a basic UI, nobody likes to stare at command console the whole ti
 - dictionary api
 - anki
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (work in progress, its too long to complete swiftly)
+- web UI - version 2.0
+- text analyzer - tells you if the text is too hard for you based on % of unknown words
 
 *known words should be marked when user completely understands them 
 
 These all will be updated depending on what is completed and what new comes up
 ### Future features (dopamine corner):
 (based on priority and its complexity, most important and least complex are on top)
-- web UI - version 2.0
+
 - docker
-- text analyzer - tells you if the text is too hard for you based on % of unknown words
 - adds more filters to list all words function
 
 #### Optional:

@@ -75,10 +75,18 @@ function refreshLanguages() {
           Anki
         </span>
         </button>
+        <div className="sidebar-bottom">
+          <a href="https://github.com/DXICIDE">
+          <img className='github' src='src/assets/github.png'/>
+          </a>
+        </div>
+        
       </div>
       <div className="main-content">
 
-      <h1 className='logo'>MagisterLinguae</h1>
+      <div className='logo-container'>
+      <img className='logo' src='src/assets/logo.png'/>
+      </div>
 
       
       <div className="tabs-bar">
