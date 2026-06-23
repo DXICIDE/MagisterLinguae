@@ -28,6 +28,7 @@ type TextStats struct {
 type body struct {
 	Text       string `json:"text"`
 	LanguageID int32  `json:"language_id"`
+	Refresh    bool   `json:"refresh"`
 }
 
 func (h *Handler) ProcessText(w http.ResponseWriter, r *http.Request) {
@@ -90,8 +91,10 @@ func (h *Handler) ProcessText(w http.ResponseWriter, r *http.Request) {
 			} else {
 
 				//update the last time we saw the word and frequency +1
-				updateWordSeenParams := database.UpdateWordSeenParams{TokenName: word, LanguageID: params.LanguageID}
-				h.Db.UpdateWordSeen(context.Background(), updateWordSeenParams)
+				if params.Refresh == false {
+					updateWordSeenParams := database.UpdateWordSeenParams{TokenName: word, LanguageID: params.LanguageID}
+					h.Db.UpdateWordSeen(context.Background(), updateWordSeenParams)
+				}
 
 				//add brackets
 				if wordDB.Known == false {

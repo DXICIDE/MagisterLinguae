@@ -9,13 +9,14 @@ function TextProcessor({ activeTab }) {
   const [badgeClass, setbadgeClass] = useState("");
 
   //api for the text
-  function handleProcess() {
+  function handleProcess(isRefresh = false) {
   fetch('/api/texts/process', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
         text: inputText,
-        language_id: activeTab.ID
+        language_id: activeTab.ID,
+        refresh: isRefresh
       })
     })
     .then(response => response.json())
@@ -27,7 +28,7 @@ function TextProcessor({ activeTab }) {
 
   useEffect(() => {
     if (inputText.trim() !== "") {
-        handleProcess();
+        handleProcess(false);
     }
   }, [activeTab]);
 
@@ -56,7 +57,7 @@ function TextProcessor({ activeTab }) {
     headers: { 'Content-Type': 'application/json' },
     })
     .then(response => response.json())
-    .then(() => handleProcess())
+    .then(() => handleProcess(true))
   }
   
   function calculateDifficulty(stats) {
@@ -93,7 +94,7 @@ function TextProcessor({ activeTab }) {
             placeholder="Paste your text here..."
         />
         <div className="button-container">
-          <button className="button-process" onClick={handleProcess}>
+          <button className="button-process" onClick={() => handleProcess(false)}>
             <span className="arrow-icon">{'>'}</span>
           </button>
         </div>
