@@ -4,6 +4,10 @@
     text-decoration: underline;
 }
 
+.known-word {
+    cursor: pointer;
+}
+
 .app-layout {
     display: flex;
     font-size: 30px;

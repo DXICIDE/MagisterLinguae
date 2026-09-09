@@ -47,7 +47,7 @@ function refreshLanguages() {
         setActiveSection("+");
     }
 }
-  
+
   return (
     <div className="app-layout">
       <div className="sidebar">

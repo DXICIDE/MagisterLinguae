@@ -32,6 +32,7 @@ function TextProcessor({ activeTab }) {
     }
   }, [activeTab]);
 
+//marks or unmarks a word
   function renderProcessedText(text) {
     console.log("Input to render:", text);
     const parts = text.split(/(\[[^\]]+\])/g);
@@ -46,9 +47,29 @@ function TextProcessor({ activeTab }) {
                     {word}
                 </span>
             );
+        } else {
+            const wordsAndSpaces = part.split(/(\s+)/g)
+            return wordsAndSpaces.map((item, wordIndex) => {
+                    return (
+                        <span key={`${index}-${wordIndex}`} 
+                              className="known-word" 
+                              onClick={() => unmarkWord(item)}>
+                            {item}
+                        </span>
+                    );
+                
+            });
         }
-        return <span key={index}>{part}</span>;
     });
+}
+
+  function unmarkWord(word) {
+      fetch(`/api/words/${word}/unmark?language_id=${activeTab.ID}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .then(() => handleProcess(true))
   }
 
   function markWord(word) {
