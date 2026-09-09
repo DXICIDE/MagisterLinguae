@@ -1,7 +1,7 @@
 una lunga e una corta. Quella lunga è la lancetta dei
 minuti e quella corta è la lancetta delle ore. La
 lancetta delle ore segna le ore, quella dei minuti segna
-i misiuti. Le ore del giorno e della notte sono: l'una
+i minuti. Le ore del giorno e della notte sono: l'una
 le due, le tre, le quattro, le cinque, le sei, le sette, le
 otto, le nove, le dieci, le undici e le dodici. Le ore
 dodici si chiamano mezzogiorno o mezzanotte. Quando
