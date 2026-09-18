@@ -13,10 +13,7 @@ The more u use it, the more useful the app will be. The goal is to get you to th
 Then you can start learning grammar and practice your output, but not here, there is no grammar or no place for your output. There will be an option for dictionary translation,
 but only for single words or short phrases, you're not really supposed to translate whole sentences. 
 
-The project is written in Go, as it's my most used language, It's currently REPL, web UI will be coming later.
-
-Current version is 1.0.0, finally we got here. This should contain everything needed for a decent language learning program. All features down below. Now the main focus 
-will be to add a basic UI, nobody likes to stare at command console the whole time. Also Feel free to send me your ideas of things you'd like added. 
+Current version is 1.0.0, finally we got here. This should contain everything needed for a decent language learning program. All features down below.
 
 ## Current features: 
 - The program can recognise words (case insensitive) which are then stored in db
@@ -35,6 +32,8 @@ will be to add a basic UI, nobody likes to stare at command console the whole ti
 - L'italiano Secondo Il Metodo Natura transcript available as a start. (work in progress, its too long to complete swiftly)
 - web UI - version 2.0
 - text analyzer - tells you if the text is too hard for you based on % of unknown words
+- support for languages with different writing (Most languages seemed to work fine, but I do not have a time nor a foolproof way to test most/all lagnuages. Korean/Arabic/Russian/Greek seemed to work fine,
+  but many other like Tamil or Chinese are hard to test since I obviously do not speak them nor do I know their grammar which makes tokenizer not work with certain words/symbols)
 
 *known words should be marked when user completely understands them 
 
@@ -48,7 +47,8 @@ These all will be updated depending on what is completed and what new comes up
 #### Optional:
 - AI support
 - account support
-- support for languages with different writing
+- history of used text
+- also save copies of current user database for safekeeping
 - additional resources for input learning
 - text to speech
 - subscription or paygate system (just for learning, I intend for this project to stay open source)
