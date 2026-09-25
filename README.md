@@ -74,6 +74,7 @@ docker compose up --build
 
 ### info:
 URL: http://localhost
+
 For clean wipe of database type:
 ```bash
 docker compose down -v
