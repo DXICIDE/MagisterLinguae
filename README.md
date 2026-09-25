@@ -54,6 +54,32 @@ These all will be updated depending on what is completed and what new comes up
 - subscription or paygate system (just for learning, I intend for this project to stay open source)
 
 ## Instalation guide:
+
+### First method (quick start):
+### Prerequisites
+ - Docker and Docker Compose
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DXICIDE/MagisterLinguae
+cd MagisterLinguae
+```
+
+### 2. Start docker compose
+
+```bash
+docker compose up --build
+```
+
+### info:
+URL: http://localhost
+For clean wipe of database type:
+```bash
+docker compose down -v
+```
+
+### Second method:
 ### Prerequisites
 
 - **Go** 1.24.3 or later

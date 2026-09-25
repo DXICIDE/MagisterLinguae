@@ -77,7 +77,7 @@ function refreshLanguages() {
         </button>
         <div className="sidebar-bottom">
           <a href="https://github.com/DXICIDE">
-          <img className='github' src='src/assets/github.png'/>
+          <img className='github' src='/github.png'/>
           </a>
         </div>
         
@@ -85,7 +85,7 @@ function refreshLanguages() {
       <div className="main-content">
 
       <div className='logo-container'>
-      <img className='logo' src='src/assets/logo.png'/>
+      <img className='logo' src='/logo.png'/>
       </div>
 
       
